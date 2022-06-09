@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Estetika.Polzovatel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Imya)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phamilia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Electronnya_Pochta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telephon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Parol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tip_Polzovatel.Imya_Tip_Polzovatel)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imya)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phamilia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Electronnya_Pochta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telephon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Parol)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tip_Polzovatel.Imya_Tip_Polzovatel)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Polzovatel }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Polzovatel }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Polzovatel })
+        </td>
+    </tr>
+}
+
+</table>

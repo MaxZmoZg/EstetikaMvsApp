@@ -1,0 +1,74 @@
+﻿@model Estetika.Polzovatel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Polzovatel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Imya)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imya)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phamilia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phamilia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Electronnya_Pochta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Electronnya_Pochta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telephon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Parol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Parol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip_Polzovatel.Imya_Tip_Polzovatel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tip_Polzovatel.Imya_Tip_Polzovatel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Polzovatel }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

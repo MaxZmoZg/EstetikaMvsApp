@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Estetika.Tip_Polzovatel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Imya_Tip_Polzovatel)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imya_Tip_Polzovatel)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Tip_Polzovatel }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Tip_Polzovatel }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Tip_Polzovatel })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Estetika.Variant>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tekst)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vopros.Zagolovok)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tekst)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vopros.Zagolovok)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Variant }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Variant }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Variant })
+        </td>
+    </tr>
+}
+
+</table>

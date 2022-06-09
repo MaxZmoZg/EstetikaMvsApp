@@ -1,0 +1,66 @@
+﻿@model Estetika.Tovar
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tovar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Imya_Tovar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imya_Tovar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo_Tovar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo_Tovar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prais)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prais)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opisanie_Tovar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opisanie_Tovar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Polzovatel.Imya)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Polzovatel.Imya)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip_Tovar.Imya_Tip_Tovar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tip_Tovar.Imya_Tip_Tovar)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Tovar }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

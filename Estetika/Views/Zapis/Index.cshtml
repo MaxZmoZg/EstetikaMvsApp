@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Estetika.Zapis>
+
+@{
+    ViewBag.Title = "Учет записи клиентов";
+}
+<br />
+<br />
+<h3>Учет записи клиентов</h3>
+
+
+
+<table class="table table-striped">
+    <tr>
+        <th class="tdbackground">
+            Клиент
+        </th>
+        <th class="tdbackground">
+            Телефон
+        </th>
+        <th class="tdbackground">
+            Cпециалист
+        </th>
+        <th class="tdbackground">
+            Дата
+        </th>
+        <th class="tdbackground">
+            Время
+        </th>
+        <th class="tdbackground">
+            Активность заявки
+        </th>
+        <th class="tdbackground">
+            Отмена записи
+        </th>
+
+
+        <th class="tdbackground"></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Polzovatel.Imya) @Html.DisplayFor(modelItem => item.Polzovatel.Phamilia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Polzovatel.Telephon)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Master.Imya_Master)
+    </td>
+    <td>
+        @(item.Data)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Vremya)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Activien)
+    </td>
+    <td>
+        <button   class="btn btn-default stylebuttonfortable">Отменить</button>
+    </td>
+
+
+
+    <td>
+        @Html.ActionLink("Изменить", "Edit", new { id = item.ID_Zapis }) |
+       
+        @Html.ActionLink("Удалить", "Delete", new { id = item.ID_Zapis })
+    </td>
+</tr>
+}
+
+</table>
+<button class=" btn btn-default stylebuttonfortableadd ">
+    
+        @Html.ActionLink("Добавить", "Create, ", new {@class = "fontcolor " })
+   
+</button>

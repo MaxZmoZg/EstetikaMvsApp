@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Estetika.Master>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<br />
+
+
+
+<div style="display:flex; flex-wrap: wrap;">
+    @if (Model.Count() == 0)
+    {
+        @("Ничего не найдено. Введите другое условие запроса");
+    }
+
+    @foreach (var item in Model)
+    {
+
+
+
+        <div style="grid-template-rows: 70% 30%; margin: 2em; padding-left:125px;">
+
+            <div style="position:relative;">
+
+                @{ if (item.Photo == null)
+                    {
+                        <img id='previewImage' class="imgactive" style='width: 150px; height: 150px; border-radius: 100px' src="~/Resource/Ableton Push 2 2.jpg" />
+                    }
+                    else
+                    {
+                        @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px; border-radius: 100px' src=\"data:image/jpeg;base64,"
+                                                             + Convert.ToBase64String(item.Photo) + "\" />")
+                        @Html.ValidationMessageFor(modelItem => item.Photo, "", new { @class = "text-danger" })
+                    }
+                }
+
+
+            </div>
+            <div class="rndclss" style=" width: 150px;  text-align:center;">
+                <div style="margin-top:10px;">
+                    @Html.ActionLink(item.Tip_Master.Imya_Tip_Master, "Details", new { id = item.Tip_Master.ID_Tip_Master }, new { @class = "textstyle masterstyle" })
+                </div>
+                <br />
+                <div>
+                    @Html.ActionLink(@"Комплекс: " + item.Opit, "Details", new { id = item.ID_Master }, new { @class = "textstyle" })
+                </div>
+                <div>
+                    @Html.ActionLink(@"Описание:" + item.Opisanie_Master, "Details", new { id = item.ID_Master }, new { @class = "textstyle" })
+                </div>
+                <br />
+                <div>
+                    <button class="btn btn-default btnstyleformasterpage ">Записаться</button>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+
+
+
+
+

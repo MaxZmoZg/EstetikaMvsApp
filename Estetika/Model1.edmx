@@ -1,0 +1,716 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище SalonModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Master">
+          <Key>
+            <PropertyRef Name="ID_Master" />
+          </Key>
+          <Property Name="ID_Master" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imya_Master" Type="varchar" MaxLength="50" />
+          <Property Name="Opisanie_Master" Type="varchar" MaxLength="300" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="Opit" Type="varchar" MaxLength="50" />
+          <Property Name="ID_Tip_Master" Type="int" />
+        </EntityType>
+        <EntityType Name="Otvet">
+          <Key>
+            <PropertyRef Name="ID_Otvet" />
+          </Key>
+          <Property Name="ID_Otvet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Variant" Type="int" Nullable="false" />
+          <Property Name="ID_Polzovatel" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Otziv">
+          <Key>
+            <PropertyRef Name="ID_Otziv" />
+          </Key>
+          <Property Name="ID_Otziv" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Napisanny_Otziv" Type="varchar(max)" />
+          <Property Name="ID_Polzovatel" Type="int" />
+        </EntityType>
+        <EntityType Name="Polzovatel">
+          <Key>
+            <PropertyRef Name="ID_Polzovatel" />
+          </Key>
+          <Property Name="ID_Polzovatel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imya" Type="varchar" MaxLength="30" />
+          <Property Name="Phamilia" Type="varchar" MaxLength="30" />
+          <Property Name="Electronnya_Pochta" Type="varchar" MaxLength="60" />
+          <Property Name="Telephon" Type="bigint" />
+          <Property Name="Login" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Parol" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="ID_Tip_Polzovatel" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tip_Master">
+          <Key>
+            <PropertyRef Name="ID_Tip_Master" />
+          </Key>
+          <Property Name="ID_Tip_Master" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imya_Tip_Master" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tip_Polzovatel">
+          <Key>
+            <PropertyRef Name="ID_Tip_Polzovatel" />
+          </Key>
+          <Property Name="ID_Tip_Polzovatel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imya_Tip_Polzovatel" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tip_Tovar">
+          <Key>
+            <PropertyRef Name="ID_Tip_Tovar" />
+          </Key>
+          <Property Name="ID_Tip_Tovar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imya_Tip_Tovar" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tovar">
+          <Key>
+            <PropertyRef Name="ID_Tovar" />
+          </Key>
+          <Property Name="ID_Tovar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imya_Tovar" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Photo_Tovar" Type="image" />
+          <Property Name="ID_Tip_Tovar" Type="int" Nullable="false" />
+          <Property Name="Prais" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Opisanie_Tovar" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ID_Polzovatel" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Variant">
+          <Key>
+            <PropertyRef Name="ID_Variant" />
+          </Key>
+          <Property Name="ID_Variant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Vopros" Type="int" Nullable="false" />
+          <Property Name="Tekst" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vopros">
+          <Key>
+            <PropertyRef Name="ID_Vopros" />
+          </Key>
+          <Property Name="ID_Vopros" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Zagolovok" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zapis">
+          <Key>
+            <PropertyRef Name="ID_Zapis" />
+          </Key>
+          <Property Name="ID_Zapis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="date" />
+          <Property Name="Vremya" Type="time" Precision="7" />
+          <Property Name="ID_Polzovatel" Type="int" />
+          <Property Name="ID_Master" Type="int" />
+          <Property Name="Activien" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Master_Tip_Master">
+          <End Role="Tip_Master" Type="Self.Tip_Master" Multiplicity="0..1" />
+          <End Role="Master" Type="Self.Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_Master">
+              <PropertyRef Name="ID_Tip_Master" />
+            </Principal>
+            <Dependent Role="Master">
+              <PropertyRef Name="ID_Tip_Master" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Otvet_Polzovatel">
+          <End Role="Polzovatel" Type="Self.Polzovatel" Multiplicity="1" />
+          <End Role="Otvet" Type="Self.Otvet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovatel">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Principal>
+            <Dependent Role="Otvet">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Otvet_Variant">
+          <End Role="Variant" Type="Self.Variant" Multiplicity="1" />
+          <End Role="Otvet" Type="Self.Otvet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Variant">
+              <PropertyRef Name="ID_Variant" />
+            </Principal>
+            <Dependent Role="Otvet">
+              <PropertyRef Name="ID_Variant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Otziv_Polzovatel">
+          <End Role="Polzovatel" Type="Self.Polzovatel" Multiplicity="0..1" />
+          <End Role="Otziv" Type="Self.Otziv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovatel">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Principal>
+            <Dependent Role="Otziv">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polzovatel_Tip_Polzovatel">
+          <End Role="Tip_Polzovatel" Type="Self.Tip_Polzovatel" Multiplicity="1" />
+          <End Role="Polzovatel" Type="Self.Polzovatel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_Polzovatel">
+              <PropertyRef Name="ID_Tip_Polzovatel" />
+            </Principal>
+            <Dependent Role="Polzovatel">
+              <PropertyRef Name="ID_Tip_Polzovatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovar_Polzovatel">
+          <End Role="Polzovatel" Type="Self.Polzovatel" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovatel">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovar_Tip_Tovar">
+          <End Role="Tip_Tovar" Type="Self.Tip_Tovar" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_Tovar">
+              <PropertyRef Name="ID_Tip_Tovar" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="ID_Tip_Tovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Variant_Vopros">
+          <End Role="Vopros" Type="Self.Vopros" Multiplicity="1" />
+          <End Role="Variant" Type="Self.Variant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vopros">
+              <PropertyRef Name="ID_Vopros" />
+            </Principal>
+            <Dependent Role="Variant">
+              <PropertyRef Name="ID_Vopros" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zapis_Master">
+          <End Role="Master" Type="Self.Master" Multiplicity="0..1" />
+          <End Role="Zapis" Type="Self.Zapis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Master">
+              <PropertyRef Name="ID_Master" />
+            </Principal>
+            <Dependent Role="Zapis">
+              <PropertyRef Name="ID_Master" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zapis_Polzovatel">
+          <End Role="Polzovatel" Type="Self.Polzovatel" Multiplicity="0..1" />
+          <End Role="Zapis" Type="Self.Zapis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovatel">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Principal>
+            <Dependent Role="Zapis">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SalonModelContainer">
+          <EntitySet Name="Master" EntityType="Self.Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Otvet" EntityType="Self.Otvet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Otziv" EntityType="Self.Otziv" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Polzovatel" EntityType="Self.Polzovatel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tip_Master" EntityType="Self.Tip_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tip_Polzovatel" EntityType="Self.Tip_Polzovatel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tip_Tovar" EntityType="Self.Tip_Tovar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tovar" EntityType="Self.Tovar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Variant" EntityType="Self.Variant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vopros" EntityType="Self.Vopros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zapis" EntityType="Self.Zapis" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Master_Tip_Master" Association="Self.FK_Master_Tip_Master">
+            <End Role="Tip_Master" EntitySet="Tip_Master" />
+            <End Role="Master" EntitySet="Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Otvet_Polzovatel" Association="Self.FK_Otvet_Polzovatel">
+            <End Role="Polzovatel" EntitySet="Polzovatel" />
+            <End Role="Otvet" EntitySet="Otvet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Otvet_Variant" Association="Self.FK_Otvet_Variant">
+            <End Role="Variant" EntitySet="Variant" />
+            <End Role="Otvet" EntitySet="Otvet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Otziv_Polzovatel" Association="Self.FK_Otziv_Polzovatel">
+            <End Role="Polzovatel" EntitySet="Polzovatel" />
+            <End Role="Otziv" EntitySet="Otziv" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polzovatel_Tip_Polzovatel" Association="Self.FK_Polzovatel_Tip_Polzovatel">
+            <End Role="Tip_Polzovatel" EntitySet="Tip_Polzovatel" />
+            <End Role="Polzovatel" EntitySet="Polzovatel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovar_Polzovatel" Association="Self.FK_Tovar_Polzovatel">
+            <End Role="Polzovatel" EntitySet="Polzovatel" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovar_Tip_Tovar" Association="Self.FK_Tovar_Tip_Tovar">
+            <End Role="Tip_Tovar" EntitySet="Tip_Tovar" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Variant_Vopros" Association="Self.FK_Variant_Vopros">
+            <End Role="Vopros" EntitySet="Vopros" />
+            <End Role="Variant" EntitySet="Variant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zapis_Master" Association="Self.FK_Zapis_Master">
+            <End Role="Master" EntitySet="Master" />
+            <End Role="Zapis" EntitySet="Zapis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zapis_Polzovatel" Association="Self.FK_Zapis_Polzovatel">
+            <End Role="Polzovatel" EntitySet="Polzovatel" />
+            <End Role="Zapis" EntitySet="Zapis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SalonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Master">
+          <Key>
+            <PropertyRef Name="ID_Master" />
+          </Key>
+          <Property Name="ID_Master" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imya_Master" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Opisanie_Master" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Opit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Tip_Master" Type="Int32" />
+          <NavigationProperty Name="Tip_Master" Relationship="Self.FK_Master_Tip_Master" FromRole="Master" ToRole="Tip_Master" />
+          <NavigationProperty Name="Zapis" Relationship="Self.FK_Zapis_Master" FromRole="Master" ToRole="Zapis" />
+        </EntityType>
+        <EntityType Name="Otvet">
+          <Key>
+            <PropertyRef Name="ID_Otvet" />
+          </Key>
+          <Property Name="ID_Otvet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Variant" Type="Int32" Nullable="false" />
+          <Property Name="ID_Polzovatel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Polzovatel" Relationship="Self.FK_Otvet_Polzovatel" FromRole="Otvet" ToRole="Polzovatel" />
+          <NavigationProperty Name="Variant" Relationship="Self.FK_Otvet_Variant" FromRole="Otvet" ToRole="Variant" />
+        </EntityType>
+        <EntityType Name="Otziv">
+          <Key>
+            <PropertyRef Name="ID_Otziv" />
+          </Key>
+          <Property Name="ID_Otziv" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Napisanny_Otziv" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Polzovatel" Type="Int32" />
+          <NavigationProperty Name="Polzovatel" Relationship="Self.FK_Otziv_Polzovatel" FromRole="Otziv" ToRole="Polzovatel" />
+        </EntityType>
+        <EntityType Name="Polzovatel">
+          <Key>
+            <PropertyRef Name="ID_Polzovatel" />
+          </Key>
+          <Property Name="ID_Polzovatel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imya" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Phamilia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Electronnya_Pochta" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Telephon" Type="Int64" />
+          <Property Name="Login" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Parol" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Tip_Polzovatel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Otvet" Relationship="Self.FK_Otvet_Polzovatel" FromRole="Polzovatel" ToRole="Otvet" />
+          <NavigationProperty Name="Otziv" Relationship="Self.FK_Otziv_Polzovatel" FromRole="Polzovatel" ToRole="Otziv" />
+          <NavigationProperty Name="Tip_Polzovatel" Relationship="Self.FK_Polzovatel_Tip_Polzovatel" FromRole="Polzovatel" ToRole="Tip_Polzovatel" />
+          <NavigationProperty Name="Tovar" Relationship="Self.FK_Tovar_Polzovatel" FromRole="Polzovatel" ToRole="Tovar" />
+          <NavigationProperty Name="Zapis" Relationship="Self.FK_Zapis_Polzovatel" FromRole="Polzovatel" ToRole="Zapis" />
+        </EntityType>
+        <EntityType Name="Tip_Master">
+          <Key>
+            <PropertyRef Name="ID_Tip_Master" />
+          </Key>
+          <Property Name="ID_Tip_Master" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imya_Tip_Master" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Master" Relationship="Self.FK_Master_Tip_Master" FromRole="Tip_Master" ToRole="Master" />
+        </EntityType>
+        <EntityType Name="Tip_Polzovatel">
+          <Key>
+            <PropertyRef Name="ID_Tip_Polzovatel" />
+          </Key>
+          <Property Name="ID_Tip_Polzovatel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imya_Tip_Polzovatel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Polzovatel" Relationship="Self.FK_Polzovatel_Tip_Polzovatel" FromRole="Tip_Polzovatel" ToRole="Polzovatel" />
+        </EntityType>
+        <EntityType Name="Tip_Tovar">
+          <Key>
+            <PropertyRef Name="ID_Tip_Tovar" />
+          </Key>
+          <Property Name="ID_Tip_Tovar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imya_Tip_Tovar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tovar" Relationship="Self.FK_Tovar_Tip_Tovar" FromRole="Tip_Tovar" ToRole="Tovar" />
+        </EntityType>
+        <EntityType Name="Tovar">
+          <Key>
+            <PropertyRef Name="ID_Tovar" />
+          </Key>
+          <Property Name="ID_Tovar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imya_Tovar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Photo_Tovar" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ID_Tip_Tovar" Type="Int32" Nullable="false" />
+          <Property Name="Prais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Opisanie_Tovar" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Polzovatel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Polzovatel" Relationship="Self.FK_Tovar_Polzovatel" FromRole="Tovar" ToRole="Polzovatel" />
+          <NavigationProperty Name="Tip_Tovar" Relationship="Self.FK_Tovar_Tip_Tovar" FromRole="Tovar" ToRole="Tip_Tovar" />
+        </EntityType>
+        <EntityType Name="Variant">
+          <Key>
+            <PropertyRef Name="ID_Variant" />
+          </Key>
+          <Property Name="ID_Variant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Vopros" Type="Int32" Nullable="false" />
+          <Property Name="Tekst" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Otvet" Relationship="Self.FK_Otvet_Variant" FromRole="Variant" ToRole="Otvet" />
+          <NavigationProperty Name="Vopros" Relationship="Self.FK_Variant_Vopros" FromRole="Variant" ToRole="Vopros" />
+        </EntityType>
+        <EntityType Name="Vopros">
+          <Key>
+            <PropertyRef Name="ID_Vopros" />
+          </Key>
+          <Property Name="ID_Vopros" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Zagolovok" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Variant" Relationship="Self.FK_Variant_Vopros" FromRole="Vopros" ToRole="Variant" />
+        </EntityType>
+        <EntityType Name="Zapis">
+          <Key>
+            <PropertyRef Name="ID_Zapis" />
+          </Key>
+          <Property Name="ID_Zapis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+          <Property Name="Vremya" Type="Time" Precision="7" />
+          <Property Name="ID_Polzovatel" Type="Int32" />
+          <Property Name="ID_Master" Type="Int32" />
+          <Property Name="Activien" Type="Boolean" />
+          <NavigationProperty Name="Master" Relationship="Self.FK_Zapis_Master" FromRole="Zapis" ToRole="Master" />
+          <NavigationProperty Name="Polzovatel" Relationship="Self.FK_Zapis_Polzovatel" FromRole="Zapis" ToRole="Polzovatel" />
+        </EntityType>
+        <Association Name="FK_Master_Tip_Master">
+          <End Role="Tip_Master" Type="Self.Tip_Master" Multiplicity="0..1" />
+          <End Role="Master" Type="Self.Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_Master">
+              <PropertyRef Name="ID_Tip_Master" />
+            </Principal>
+            <Dependent Role="Master">
+              <PropertyRef Name="ID_Tip_Master" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zapis_Master">
+          <End Role="Master" Type="Self.Master" Multiplicity="0..1" />
+          <End Role="Zapis" Type="Self.Zapis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Master">
+              <PropertyRef Name="ID_Master" />
+            </Principal>
+            <Dependent Role="Zapis">
+              <PropertyRef Name="ID_Master" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Otvet_Polzovatel">
+          <End Role="Polzovatel" Type="Self.Polzovatel" Multiplicity="1" />
+          <End Role="Otvet" Type="Self.Otvet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovatel">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Principal>
+            <Dependent Role="Otvet">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Otvet_Variant">
+          <End Role="Variant" Type="Self.Variant" Multiplicity="1" />
+          <End Role="Otvet" Type="Self.Otvet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Variant">
+              <PropertyRef Name="ID_Variant" />
+            </Principal>
+            <Dependent Role="Otvet">
+              <PropertyRef Name="ID_Variant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Otziv_Polzovatel">
+          <End Role="Polzovatel" Type="Self.Polzovatel" Multiplicity="0..1" />
+          <End Role="Otziv" Type="Self.Otziv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovatel">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Principal>
+            <Dependent Role="Otziv">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Polzovatel_Tip_Polzovatel">
+          <End Role="Tip_Polzovatel" Type="Self.Tip_Polzovatel" Multiplicity="1" />
+          <End Role="Polzovatel" Type="Self.Polzovatel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_Polzovatel">
+              <PropertyRef Name="ID_Tip_Polzovatel" />
+            </Principal>
+            <Dependent Role="Polzovatel">
+              <PropertyRef Name="ID_Tip_Polzovatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovar_Polzovatel">
+          <End Role="Polzovatel" Type="Self.Polzovatel" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovatel">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zapis_Polzovatel">
+          <End Role="Polzovatel" Type="Self.Polzovatel" Multiplicity="0..1" />
+          <End Role="Zapis" Type="Self.Zapis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Polzovatel">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Principal>
+            <Dependent Role="Zapis">
+              <PropertyRef Name="ID_Polzovatel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovar_Tip_Tovar">
+          <End Role="Tip_Tovar" Type="Self.Tip_Tovar" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_Tovar">
+              <PropertyRef Name="ID_Tip_Tovar" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="ID_Tip_Tovar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Variant_Vopros">
+          <End Role="Vopros" Type="Self.Vopros" Multiplicity="1" />
+          <End Role="Variant" Type="Self.Variant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vopros">
+              <PropertyRef Name="ID_Vopros" />
+            </Principal>
+            <Dependent Role="Variant">
+              <PropertyRef Name="ID_Vopros" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SalonEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Master" EntityType="Self.Master" />
+          <EntitySet Name="Otvet" EntityType="Self.Otvet" />
+          <EntitySet Name="Otziv" EntityType="Self.Otziv" />
+          <EntitySet Name="Polzovatel" EntityType="Self.Polzovatel" />
+          <EntitySet Name="Tip_Master" EntityType="Self.Tip_Master" />
+          <EntitySet Name="Tip_Polzovatel" EntityType="Self.Tip_Polzovatel" />
+          <EntitySet Name="Tip_Tovar" EntityType="Self.Tip_Tovar" />
+          <EntitySet Name="Tovar" EntityType="Self.Tovar" />
+          <EntitySet Name="Variant" EntityType="Self.Variant" />
+          <EntitySet Name="Vopros" EntityType="Self.Vopros" />
+          <EntitySet Name="Zapis" EntityType="Self.Zapis" />
+          <AssociationSet Name="FK_Master_Tip_Master" Association="Self.FK_Master_Tip_Master">
+            <End Role="Tip_Master" EntitySet="Tip_Master" />
+            <End Role="Master" EntitySet="Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zapis_Master" Association="Self.FK_Zapis_Master">
+            <End Role="Master" EntitySet="Master" />
+            <End Role="Zapis" EntitySet="Zapis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Otvet_Polzovatel" Association="Self.FK_Otvet_Polzovatel">
+            <End Role="Polzovatel" EntitySet="Polzovatel" />
+            <End Role="Otvet" EntitySet="Otvet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Otvet_Variant" Association="Self.FK_Otvet_Variant">
+            <End Role="Variant" EntitySet="Variant" />
+            <End Role="Otvet" EntitySet="Otvet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Otziv_Polzovatel" Association="Self.FK_Otziv_Polzovatel">
+            <End Role="Polzovatel" EntitySet="Polzovatel" />
+            <End Role="Otziv" EntitySet="Otziv" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Polzovatel_Tip_Polzovatel" Association="Self.FK_Polzovatel_Tip_Polzovatel">
+            <End Role="Tip_Polzovatel" EntitySet="Tip_Polzovatel" />
+            <End Role="Polzovatel" EntitySet="Polzovatel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovar_Polzovatel" Association="Self.FK_Tovar_Polzovatel">
+            <End Role="Polzovatel" EntitySet="Polzovatel" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zapis_Polzovatel" Association="Self.FK_Zapis_Polzovatel">
+            <End Role="Polzovatel" EntitySet="Polzovatel" />
+            <End Role="Zapis" EntitySet="Zapis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovar_Tip_Tovar" Association="Self.FK_Tovar_Tip_Tovar">
+            <End Role="Tip_Tovar" EntitySet="Tip_Tovar" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Variant_Vopros" Association="Self.FK_Variant_Vopros">
+            <End Role="Vopros" EntitySet="Vopros" />
+            <End Role="Variant" EntitySet="Variant" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SalonModelContainer" CdmEntityContainer="SalonEntities">
+          <EntitySetMapping Name="Master">
+            <EntityTypeMapping TypeName="SalonModel.Master">
+              <MappingFragment StoreEntitySet="Master">
+                <ScalarProperty Name="ID_Master" ColumnName="ID_Master" />
+                <ScalarProperty Name="Imya_Master" ColumnName="Imya_Master" />
+                <ScalarProperty Name="Opisanie_Master" ColumnName="Opisanie_Master" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Opit" ColumnName="Opit" />
+                <ScalarProperty Name="ID_Tip_Master" ColumnName="ID_Tip_Master" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Otvet">
+            <EntityTypeMapping TypeName="SalonModel.Otvet">
+              <MappingFragment StoreEntitySet="Otvet">
+                <ScalarProperty Name="ID_Otvet" ColumnName="ID_Otvet" />
+                <ScalarProperty Name="ID_Variant" ColumnName="ID_Variant" />
+                <ScalarProperty Name="ID_Polzovatel" ColumnName="ID_Polzovatel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Otziv">
+            <EntityTypeMapping TypeName="SalonModel.Otziv">
+              <MappingFragment StoreEntitySet="Otziv">
+                <ScalarProperty Name="ID_Otziv" ColumnName="ID_Otziv" />
+                <ScalarProperty Name="Napisanny_Otziv" ColumnName="Napisanny_Otziv" />
+                <ScalarProperty Name="ID_Polzovatel" ColumnName="ID_Polzovatel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Polzovatel">
+            <EntityTypeMapping TypeName="SalonModel.Polzovatel">
+              <MappingFragment StoreEntitySet="Polzovatel">
+                <ScalarProperty Name="ID_Polzovatel" ColumnName="ID_Polzovatel" />
+                <ScalarProperty Name="Imya" ColumnName="Imya" />
+                <ScalarProperty Name="Phamilia" ColumnName="Phamilia" />
+                <ScalarProperty Name="Electronnya_Pochta" ColumnName="Electronnya_Pochta" />
+                <ScalarProperty Name="Telephon" ColumnName="Telephon" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Parol" ColumnName="Parol" />
+                <ScalarProperty Name="ID_Tip_Polzovatel" ColumnName="ID_Tip_Polzovatel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tip_Master">
+            <EntityTypeMapping TypeName="SalonModel.Tip_Master">
+              <MappingFragment StoreEntitySet="Tip_Master">
+                <ScalarProperty Name="ID_Tip_Master" ColumnName="ID_Tip_Master" />
+                <ScalarProperty Name="Imya_Tip_Master" ColumnName="Imya_Tip_Master" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tip_Polzovatel">
+            <EntityTypeMapping TypeName="SalonModel.Tip_Polzovatel">
+              <MappingFragment StoreEntitySet="Tip_Polzovatel">
+                <ScalarProperty Name="ID_Tip_Polzovatel" ColumnName="ID_Tip_Polzovatel" />
+                <ScalarProperty Name="Imya_Tip_Polzovatel" ColumnName="Imya_Tip_Polzovatel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tip_Tovar">
+            <EntityTypeMapping TypeName="SalonModel.Tip_Tovar">
+              <MappingFragment StoreEntitySet="Tip_Tovar">
+                <ScalarProperty Name="ID_Tip_Tovar" ColumnName="ID_Tip_Tovar" />
+                <ScalarProperty Name="Imya_Tip_Tovar" ColumnName="Imya_Tip_Tovar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tovar">
+            <EntityTypeMapping TypeName="SalonModel.Tovar">
+              <MappingFragment StoreEntitySet="Tovar">
+                <ScalarProperty Name="ID_Tovar" ColumnName="ID_Tovar" />
+                <ScalarProperty Name="Imya_Tovar" ColumnName="Imya_Tovar" />
+                <ScalarProperty Name="Photo_Tovar" ColumnName="Photo_Tovar" />
+                <ScalarProperty Name="ID_Tip_Tovar" ColumnName="ID_Tip_Tovar" />
+                <ScalarProperty Name="Prais" ColumnName="Prais" />
+                <ScalarProperty Name="Opisanie_Tovar" ColumnName="Opisanie_Tovar" />
+                <ScalarProperty Name="ID_Polzovatel" ColumnName="ID_Polzovatel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Variant">
+            <EntityTypeMapping TypeName="SalonModel.Variant">
+              <MappingFragment StoreEntitySet="Variant">
+                <ScalarProperty Name="ID_Variant" ColumnName="ID_Variant" />
+                <ScalarProperty Name="ID_Vopros" ColumnName="ID_Vopros" />
+                <ScalarProperty Name="Tekst" ColumnName="Tekst" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vopros">
+            <EntityTypeMapping TypeName="SalonModel.Vopros">
+              <MappingFragment StoreEntitySet="Vopros">
+                <ScalarProperty Name="ID_Vopros" ColumnName="ID_Vopros" />
+                <ScalarProperty Name="Zagolovok" ColumnName="Zagolovok" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zapis">
+            <EntityTypeMapping TypeName="SalonModel.Zapis">
+              <MappingFragment StoreEntitySet="Zapis">
+                <ScalarProperty Name="ID_Zapis" ColumnName="ID_Zapis" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Vremya" ColumnName="Vremya" />
+                <ScalarProperty Name="ID_Polzovatel" ColumnName="ID_Polzovatel" />
+                <ScalarProperty Name="ID_Master" ColumnName="ID_Master" />
+                <ScalarProperty Name="Activien" ColumnName="Activien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

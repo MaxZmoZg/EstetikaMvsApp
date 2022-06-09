@@ -1,0 +1,89 @@
+﻿@model Estetika.Zapis
+@{
+    Zapis zapis = new Zapis();
+    @Styles.Render("~/Content/StylePage/HomeStyle.css")
+    ViewBag.Title = "Home Page";
+}
+
+<body class="u-body u-xl-mode">
+    <section class=" u-align-left u-clearfix u-image u-shading u-section-1" src="" data-image-width="2029" data-image-height="2160" id="sec-4bd8">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <h1 class="u-text u-text-default u-title u-text-1" style="margin-left:30px;">BETA HAIR </h1>
+            <p class="u-align-center-xs u-large-text u-text u-text-variant u-text-2 "style="margin-left:30px;">Салон по эстетике волос, который помогает девушкам отрастить здоровые волосы с помощью домашнего ухода</p>
+            @Html.ActionLink("Записаться", "Create", "Zapis", new { id = zapis.ID_Zapis}, new { @class = " u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1 stylemargincard" })
+            
+        </div>
+    </section>
+    <section class="u-align-center u-clearfix u-section-2" id="sec-dc83">
+        <div class="u-clearfix u-sheet u-valign-middle-xl u-sheet-1">
+            <h5 class="u-text u-text-default u-text-1">BETA HAIR</h5>
+            <h1 class="u-text u-text-2">Салон по ​эстетике волос</h1>
+            <p class="u-text u-text-3">Мы огромная команда специалистов, которые на своём опыте убедились, что иметь здоровые и красивые волосы может каждая. Всего лишь нужно подобрать подходящие средства для волос и научиться правильно ими пользоваться. Этим наш салон и занимается. Мы рассказываем девушкам, как правильно ухаживать за волосами дома, выявляем их ошибки в уходе и помогаем отрастить здоровое полотно без использования салонных процедур.</p>
+        </div>
+    </section>
+    <section class="u-align-center u-clearfix u-section-3" id="sec-3caa">
+        <div class="u-clearfix u-sheet u-valign-middle-xl u-sheet-1">
+            <h2 class="u-text u-text-default-xl u-text-1">
+                Результаты наших клиентов<span style="font-size: 1.875rem;">
+                    <span style="font-weight: 700;">
+                        <span style="font-size: 1.5rem;"></span>
+                    </span>
+                </span>
+            </h2>
+            <div class="u-expanded-width u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-1">
+                <div class="u-gallery-inner u-gallery-inner-1">
+                    <div class="u-effect-fade u-gallery-item">
+                        <div class="u-back-slide" data-image-width="1620" data-image-height="2160">
+                            <img class="u-back-image u-expanded" src="~/Resource/2.jpg">
+                        </div>
+                        <div class="u-over-slide u-shading u-over-slide-1">
+                            <h3 class="u-gallery-heading"></h3>
+                            <p class="u-gallery-text"></p>
+                        </div>
+                    </div>
+                    <div class="u-effect-fade u-gallery-item">
+                        <div class="u-back-slide" data-image-width="1200" data-image-height="1600">
+                            <img class="u-back-image u-expanded" src="~/Resource/20.jpg">
+                        </div>
+                        <div class="u-over-slide u-shading u-over-slide-2">
+                            <h3 class="u-gallery-heading"></h3>
+                            <p class="u-gallery-text"></p>
+                        </div>
+                    </div>
+                    <div class="u-effect-fade u-gallery-item">
+                        <div class="u-back-slide" data-image-width="1620" data-image-height="2160">
+                            <img class="u-back-image u-expanded" src="~/Resource/11.jpg">
+                        </div>
+                        <div class="u-over-slide u-shading u-over-slide-3">
+                            <h3 class="u-gallery-heading"></h3>
+                            <p class="u-gallery-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="u-align-left u-clearfix u-section-4" id="carousel_f205">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+                <div class="u-layout">
+                    <div class="u-layout-row">
+                        <div class="u-container-style u-image u-layout-cell u-size-30 u-image-1" data-image-width="1134" data-image-height="1239">
+                            <div class="u-container-layout u-container-layout-1"></div>
+                        </div>
+                        <div class="u-align-left u-container-style u-layout-cell u-shape-rectangle u-size-30 u-layout-cell-2">
+                            <div class="u-container-layout u-container-layout-2">
+                                <h2 class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xs u-custom-font u-font-roboto u-text u-text-1">Контактная информация</h2>
+                                <p class="u-custom-font u-font-roboto u-text u-text-2">
+                                    Адрес: ул. Газовиков, 34 <br>Инстаграм: beta_hairlab<br>Телефон: + 7 999 487 13 12
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</body>

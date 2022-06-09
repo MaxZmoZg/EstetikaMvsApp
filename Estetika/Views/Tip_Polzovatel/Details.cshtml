@@ -1,0 +1,26 @@
+﻿@model Estetika.Tip_Polzovatel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tip_Polzovatel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Imya_Tip_Polzovatel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imya_Tip_Polzovatel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Tip_Polzovatel }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
