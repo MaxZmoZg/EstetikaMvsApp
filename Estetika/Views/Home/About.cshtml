@@ -1,7 +1,17 @@
-﻿@{
-    ViewBag.Title = "About";
+﻿@model IEnumerable<Estetika.Polzovatel>
+@{
+    ViewBag.Title = "Управление данными";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<br />
+<br />
 
-<p>Use this area to provide additional information.</p>
+<h3>Управление данными:</h3>
+<ul>
+    <li>@Html.ActionLink("Запись", "Index", "Zapis", new { area = "" }, new { @class = "header-style-text decor" })</li>
+    <li>@Html.ActionLink("Пользователи", "Index", "Polzovatels", new { area = "" }, new { @class = "header-style-text decor" })</li>
+    <li>@Html.ActionLink("Товары", "Index", "Tovars", new { area = "" }, new { @class = "header-style-text decor" })</li>
+    <li>@Html.ActionLink("Тип товара", "Index", "Tip_Tovar", new { area = "" }, new { @class = "header-style-text decor" })</li>
+    <li>@Html.ActionLink("Ответы на вопросы", "Index", "Variants", new { area = "" }, new { @class = "header-style-text decor" })</li>
+    @*<li>@Html.ActionLink("Мастера", "Index", "Masters", new { area = "" }, new { @class = "header-style-text decor" })</li>*@
+    <li>@Html.ActionLink("Тип мастера", "Index", "Tip_Master", new { area = "" }, new { @class = "header-style-text decor" })</li>
+</ul>

@@ -40,6 +40,7 @@ namespace Estetika.Controllers
         // GET: Zapis/Create
         public ActionResult Create()
         {
+
             ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master");
             ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya");
             return View();
@@ -50,20 +51,22 @@ namespace Estetika.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID_Zapis,Data,Vremya,ID_Polzovatel,ID_Master,Activien")] Zapis zapis)
         {
             if (ModelState.IsValid)
 
-            {
-                //Zapis zapisfrobd = new Zapis();
-                //zapisfrobd.Data = zapis.Data;
-                //zapisfrobd.Vremya = zapis.Vremya;
-                //zapisfrobd.ID_Polzovatel = zapis.Polzovatel.ID_Polzovatel;
-                //zapisfrobd.ID_Master = zapis.ID_Master;
-                //zapisfrobd.Activien = true;
-                db.Zapis.Add(zapis);
+            { 
+                Zapis zapisfrobd = new Zapis();
+                zapisfrobd.Data = zapis.Data;
+                zapisfrobd.Vremya = zapis.Vremya;
+                zapisfrobd.ID_Polzovatel = db.Polzovatel.First(u => u.Login == HttpContext.User.Identity.Name).ID_Polzovatel;
+                zapisfrobd.ID_Master = zapis.ID_Master;
+                zapisfrobd.Activien = true;
+              
+                db.Zapis.Add(zapisfrobd);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Polzovatels");
             }
 
             ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", zapis.ID_Master);

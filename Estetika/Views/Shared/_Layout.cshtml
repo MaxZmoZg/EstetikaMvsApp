@@ -23,9 +23,15 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Специалисты", "Index", "Masters")</li>
-                    <li>@Html.ActionLink("Средства", "About", "Home")</li>
+                    <li>@Html.ActionLink("Средства", "Index", "Sredstva")</li>
                     <li>@Html.ActionLink("Анализ", "Index", "Vopros")</li>
                     <li>@Html.ActionLink("Отзывы", "Index", "Otzivs")</li>
+                    @{
+                        if (User.Identity.Name == "Admin")
+                        {
+                            <li>@Html.ActionLink("Управление данными", "About", "Home", new { area = "" }, new { @class = "header-style-text " })</li>
+                        }
+                    }
                 </ul>
                 <ul name="Hidd" class="nav navbar-nav navbar-right">
                     @{
@@ -49,7 +55,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+            <p>&copy;BetaHair - 2022</p>
         </footer>
     </div>
 

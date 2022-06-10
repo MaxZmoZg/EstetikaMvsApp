@@ -129,6 +129,7 @@ namespace Estetika.Controllers
                     Parol = model.Password,
                     Login = model.Login,
                     Imya = model.Login,
+                    Telephon = long.Parse(model.PhoneNumber),
                     ID_Tip_Polzovatel = UserTypes.User
                 };
 

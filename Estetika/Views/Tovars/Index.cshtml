@@ -24,6 +24,15 @@
             @Html.DisplayNameFor(model => model.Opisanie_Tovar)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Srok_hranen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Markirofka)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uslovia_hranenya)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Polzovatel.Imya)
         </th>
         <th>
@@ -38,13 +47,32 @@
             @Html.DisplayFor(modelItem => item.Imya_Tovar)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Photo_Tovar)
+            @{ if (item.Photo_Tovar == null)
+                {
+                    <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/userphoto.png" />
+                }
+                else
+                {
+                    @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
+                                                         + Convert.ToBase64String(item.Photo_Tovar) + "\" />")
+                    @Html.ValidationMessageFor(modelItem => item.Photo_Tovar, "", new { @class = "text-danger" })
+                }
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Prais)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Opisanie_Tovar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Srok_hranen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Markirofka)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uslovia_hranenya)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Polzovatel.Imya)

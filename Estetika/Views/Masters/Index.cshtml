@@ -43,6 +43,9 @@
                 </div>
                 <br />
                 <div>
+                    @Html.ActionLink(@"Мастер: " + item.Imya_Master, "Details", new { id = item.ID_Master }, new { @class = "textstyle" })
+                </div>
+                <div>
                     @Html.ActionLink(@"Комплекс: " + item.Opit, "Details", new { id = item.ID_Master }, new { @class = "textstyle" })
                 </div>
                 <div>
@@ -50,7 +53,8 @@
                 </div>
                 <br />
                 <div>
-                    <button class="btn btn-default btnstyleformasterpage ">Записаться</button>
+                    @Html.ActionLink("Записаться", "Create", "Zapis", new { id = item.ID_Master }, new { @class = "btn btn-default btnstyleformasterpage " })
+
                 </div>
             </div>
         </div>

@@ -10,111 +10,116 @@ using Estetika;
 
 namespace Estetika.Controllers
 {
-    public class PolzovatelsController : Controller
+    public class MyZapisController : Controller
     {
         private SalonEntities db = new SalonEntities();
 
-        // GET: Polzovatels
+        // GET: MyZapis
         public ActionResult Index()
         {
-            var polzovatel = db.Polzovatel.Include(p => p.Tip_Polzovatel);
-            return View(polzovatel.ToList());
+            var zapis = db.Zapis.Include(z => z.Master).Include(z => z.Polzovatel);
+            return View(zapis.ToList());
         }
 
-
-        // GET: Polzovatels/Details/5
-        [Authorize]
-        public ActionResult Details(string login)
+        // GET: MyZapis/Details/5
+        public ActionResult Details(int? id)
         {
-             if (login == null)
+            if (id == null)
             {
-                return View(
-                    db.Polzovatel.First(u => u.Login == HttpContext.User.Identity.Name));
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(
-                db.Polzovatel.First(u => u.Login == login));
+            Zapis zapis = db.Zapis.Find(id);
+            if (zapis == null)
+            {
+                return HttpNotFound();
+            }
+            return View(zapis);
         }
 
-        // GET: Polzovatels/Create
+        // GET: MyZapis/Create
         public ActionResult Create()
         {
-            ViewBag.ID_Tip_Polzovatel = new SelectList(db.Tip_Polzovatel, "ID_Tip_Polzovatel", "Imya_Tip_Polzovatel");
+            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master");
+            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya");
             return View();
         }
 
-        // POST: Polzovatels/Create
+        // POST: MyZapis/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Polzovatel,Imya,Phamilia,Electronnya_Pochta,Telephon,Login,Parol,ID_Tip_Polzovatel")] Polzovatel polzovatel)
+        public ActionResult Create([Bind(Include = "ID_Zapis,Data,Vremya,ID_Polzovatel,ID_Master,Activien")] Zapis zapis)
         {
             if (ModelState.IsValid)
             {
-                db.Polzovatel.Add(polzovatel);
+                db.Zapis.Add(zapis);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_Tip_Polzovatel = new SelectList(db.Tip_Polzovatel, "ID_Tip_Polzovatel", "Imya_Tip_Polzovatel", polzovatel.ID_Tip_Polzovatel);
-            return View(polzovatel);
+            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", zapis.ID_Master);
+            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", zapis.ID_Polzovatel);
+            return View(zapis);
         }
 
-        // GET: Polzovatels/Edit/5
+        // GET: MyZapis/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Polzovatel polzovatel = db.Polzovatel.Find(id);
-            if (polzovatel == null)
+            Zapis zapis = db.Zapis.Find(id);
+            if (zapis == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_Tip_Polzovatel = new SelectList(db.Tip_Polzovatel, "ID_Tip_Polzovatel", "Imya_Tip_Polzovatel", polzovatel.ID_Tip_Polzovatel);
-            return View(polzovatel);
+            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", zapis.ID_Master);
+            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", zapis.ID_Polzovatel);
+            return View(zapis);
         }
 
-        // POST: Polzovatels/Edit/5
+        // POST: MyZapis/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Polzovatel,Imya,Phamilia,Electronnya_Pochta,Telephon,Login,Parol,ID_Tip_Polzovatel")] Polzovatel polzovatel)
+        public ActionResult Edit([Bind(Include = "ID_Zapis,Data,Vremya,ID_Polzovatel,ID_Master,Activien")] Zapis zapis)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(polzovatel).State = EntityState.Modified;
+                db.Entry(zapis).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_Tip_Polzovatel = new SelectList(db.Tip_Polzovatel, "ID_Tip_Polzovatel", "Imya_Tip_Polzovatel", polzovatel.ID_Tip_Polzovatel);
-            return View(polzovatel);
+            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", zapis.ID_Master);
+            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", zapis.ID_Polzovatel);
+            return View(zapis);
         }
 
-        // GET: Polzovatels/Delete/5
+        // GET: MyZapis/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Polzovatel polzovatel = db.Polzovatel.Find(id);
-            if (polzovatel == null)
+            Zapis zapis = db.Zapis.Find(id);
+            if (zapis == null)
             {
                 return HttpNotFound();
             }
-            return View(polzovatel);
+            return View(zapis);
         }
 
-        // POST: Polzovatels/Delete/5
+        // POST: MyZapis/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Polzovatel polzovatel = db.Polzovatel.Find(id);
-            db.Polzovatel.Remove(polzovatel);
+            Zapis zapis = db.Zapis.Find(id);
+            db.Zapis.Remove(zapis);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

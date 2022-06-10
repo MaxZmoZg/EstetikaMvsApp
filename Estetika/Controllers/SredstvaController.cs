@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,18 +10,67 @@ using Estetika;
 
 namespace Estetika.Controllers
 {
-    public class TovarsController : Controller
+    public class SredstvaController : Controller
     {
         private SalonEntities db = new SalonEntities();
 
-        // GET: Tovars
+        // GET: Sredstva
         public ActionResult Index()
         {
-            var tovar = db.Tovar.Include(t => t.Polzovatel).Include(t => t.Tip_Tovar);
-            return View(tovar.ToList());
+            LoadDropDownLists();
+            var sredstva = db.Tovar
+                .Include(m => m.Tip_Tovar);
+           
+            return View(sredstva.ToList());
+        }
+        private void LoadDropDownLists()
+        {
+            List<Tip_Tovar> tip_Tovars = db.Tip_Tovar.ToList();
+            tip_Tovars.Insert(0, new Tip_Tovar { Imya_Tip_Tovar = "-----" });
+            ViewBag.ID_Tip_Tovar = new SelectList(tip_Tovars, "ID_Tip_Tovar", "Imya_Tip_Tovar");
+
+           
         }
 
-        // GET: Tovars/Details/5
+
+        [HttpPost]
+        public ActionResult Filter()
+        {
+            List<Tovar> filteredTovar = db.Tovar
+                .Include(m => m.Tip_Tovar)
+                .ToList();
+            if (!string.IsNullOrWhiteSpace(Request["Name"]))
+            {
+                filteredTovar = filteredTovar.Where(m =>
+                {
+                    return m.Imya_Tovar.IndexOf(Request["Name"],
+                                                StringComparison.OrdinalIgnoreCase) != -1;
+                })
+                    .ToList();
+            }
+
+            if (Request.Form["ID_Tip_Tovar"] is string tipTovaraId && tipTovaraId != "0")
+            {
+                filteredTovar = filteredTovar.Where(m => m.ID_Tip_Tovar == int.Parse(tipTovaraId))
+                    .ToList();
+            }
+       
+            if (Request.Form.Keys.OfType<string>().Contains("Алфавиту"))
+            {
+                filteredTovar = filteredTovar
+                    .OrderByDescending(m => m.Imya_Tovar)
+                    .ToList();
+            }
+            
+           
+            LoadDropDownLists();
+            return View("Index", filteredTovar);
+        }
+
+
+
+
+        // GET: Sredstva/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,7 +85,7 @@ namespace Estetika.Controllers
             return View(tovar);
         }
 
-        // GET: Tovars/Create
+        // GET: Sredstva/Create
         public ActionResult Create()
         {
             ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya");
@@ -45,24 +93,15 @@ namespace Estetika.Controllers
             return View();
         }
 
-        // POST: Tovars/Create
+        // POST: Sredstva/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Tovar,Imya_Tovar,Photo_Tovar,ID_Tip_Tovar,Prais,Opisanie_Tovar,ID_Polzovatel,Srok_hranen,Markirofka,Uslovia_hranenya")] Tovar tovar, HttpPostedFileBase uploadImage)
+        public ActionResult Create([Bind(Include = "ID_Tovar,Imya_Tovar,Photo_Tovar,ID_Tip_Tovar,Prais,Opisanie_Tovar,ID_Polzovatel,Srok_hranen,Markirofka,Uslovia_hranenya")] Tovar tovar)
         {
             if (ModelState.IsValid)
             {
-                if (uploadImage != null)
-                {
-                    byte[] imageData = null;
-                    using (var binaryReader = new BinaryReader(uploadImage.InputStream))
-                    {
-                        imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
-                    }
-                    tovar.Photo_Tovar = imageData;
-                }
                 db.Tovar.Add(tovar);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -73,7 +112,7 @@ namespace Estetika.Controllers
             return View(tovar);
         }
 
-        // GET: Tovars/Edit/5
+        // GET: Sredstva/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,7 +129,7 @@ namespace Estetika.Controllers
             return View(tovar);
         }
 
-        // POST: Tovars/Edit/5
+        // POST: Sredstva/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -108,7 +147,7 @@ namespace Estetika.Controllers
             return View(tovar);
         }
 
-        // GET: Tovars/Delete/5
+        // GET: Sredstva/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -123,7 +162,7 @@ namespace Estetika.Controllers
             return View(tovar);
         }
 
-        // POST: Tovars/Delete/5
+        // POST: Sredstva/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

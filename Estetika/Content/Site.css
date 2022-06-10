@@ -2,6 +2,15 @@
     padding-left: 50px;
     padding-right: 50px;
 }
+li  {
+    list-style-type:none;
+   
+}
+.decor{
+    text-decoration:none;
+    font-size:20px;
+    color:black;
+}
 
 .img-sm {
     width: 46px;
@@ -220,4 +229,69 @@ button > a {
 
 .ulstyle--margin{
     margin-left:10px;
+}
+
+.bar {
+    display: flex;
+    z-index: 3;
+    height: 44px;
+    background: #fff;
+    border: 1px solid #dfe1e5;
+    box-shadow: none;
+    border-radius: 24px;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+    width: 638px;
+    margin-bottom: 15px;
+    max-width: 484px;
+}
+
+    .bar:hover {
+        box-shadow: 1px 1px 8px 1px #dcdcdc;
+    }
+
+    .bar:focus-within {
+        box-shadow: 1px 1px 8px 1px #dcdcdc;
+        outline: none;
+    }
+.bar2 {
+    flex: 1;
+    display: flex;
+    padding: 5px 8px 0 14px;
+}
+.searchbar {
+    border: none;
+    font-size: 16px;
+    outline: none;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+}
+.voice {
+    height: 20px;
+    position: relative;
+    top: 5px;
+}
+.div_filter {
+    display: flex;
+    margin-bottom: 15px;
+    flex-direction: column;
+    place-items: flex-start;
+}
+
+.btn_filter {
+    background-color: #00b4ef;
+    color: white;
+}
+.labelstyle {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    margin-left: 20px;
+}
+.cb {
+    margin-left: 20px;
+    width: 120px;
+    height: 30px;
 }

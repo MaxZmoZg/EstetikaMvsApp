@@ -12,20 +12,12 @@ namespace Estetika
     using System;
     using System.Collections.Generic;
     
-    public partial class Tovar
+    public partial class sysdiagrams
     {
-        public int ID_Tovar { get; set; }
-        public string Imya_Tovar { get; set; }
-        public byte[] Photo_Tovar { get; set; }
-        public int ID_Tip_Tovar { get; set; }
-        public string Prais { get; set; }
-        public string Opisanie_Tovar { get; set; }
-        public int ID_Polzovatel { get; set; }
-        public string Srok_hranen { get; set; }
-        public string Markirofka { get; set; }
-        public string Uslovia_hranenya { get; set; }
-    
-        public virtual Polzovatel Polzovatel { get; set; }
-        public virtual Tip_Tovar Tip_Tovar { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

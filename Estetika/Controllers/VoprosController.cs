@@ -27,11 +27,11 @@ namespace Estetika.Controllers
             var results = Request.Form;
             if (results["Какие проблемы у вас с волосами?"] == "ломаются, секутся" && results["Чем из этого вы пользуетесь на постоянной основе?"]== "Фен")
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Sredstva");
             }
             else
             {
-                return RedirectToAction("Index", "Otzivs");
+                return RedirectToAction("Index", "Sredstva");
             }
         }
 

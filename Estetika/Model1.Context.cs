@@ -29,6 +29,7 @@ namespace Estetika
         public virtual DbSet<Otvet> Otvet { get; set; }
         public virtual DbSet<Otziv> Otziv { get; set; }
         public virtual DbSet<Polzovatel> Polzovatel { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tip_Master> Tip_Master { get; set; }
         public virtual DbSet<Tip_Polzovatel> Tip_Polzovatel { get; set; }
         public virtual DbSet<Tip_Tovar> Tip_Tovar { get; set; }

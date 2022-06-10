@@ -1,0 +1,58 @@
+﻿@model Estetika.Zapis
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Zapis</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vremya)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vremya)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Master.Imya_Master)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Master.Imya_Master)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Polzovatel.Imya)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Polzovatel.Imya)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Zapis }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
