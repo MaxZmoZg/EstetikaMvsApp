@@ -9,11 +9,11 @@ using System.Web.Mvc;
 
 using Estetika;
 
-namespace Estetika.Controllers
+using Estetika.Models.Entities; namespace Estetika.Controllers
 {
     public class ZapisController : Controller
     {
-        private SalonEntities db = new SalonEntities();
+        private readonly SalonEntities db = new SalonEntities();
 
         // GET: Zapis
         public ActionResult Index()
@@ -56,14 +56,16 @@ namespace Estetika.Controllers
         {
             if (ModelState.IsValid)
 
-            { 
-                Zapis zapisfrobd = new Zapis();
-                zapisfrobd.Data = zapis.Data;
-                zapisfrobd.Vremya = zapis.Vremya;
-                zapisfrobd.ID_Polzovatel = db.Polzovatel.First(u => u.Login == HttpContext.User.Identity.Name).ID_Polzovatel;
-                zapisfrobd.ID_Master = zapis.ID_Master;
-                zapisfrobd.Activien = true;
-              
+            {
+                Zapis zapisfrobd = new Zapis
+                {
+                    Data = zapis.Data,
+                    Vremya = zapis.Vremya,
+                    ID_Polzovatel = db.Polzovatel.First(u => u.Login == HttpContext.User.Identity.Name).ID_Polzovatel,
+                    ID_Master = zapis.ID_Master,
+                    Activien = true
+                };
+
                 db.Zapis.Add(zapisfrobd);
                 db.SaveChanges();
                 return RedirectToAction("Details", "Polzovatels");
