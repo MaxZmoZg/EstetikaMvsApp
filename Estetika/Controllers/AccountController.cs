@@ -130,7 +130,7 @@ namespace Estetika.Controllers
                     Login = model.Login,
                     Imya = model.Login,
                     Telephon = long.Parse(model.PhoneNumber),
-                    ID_Tip_Polzovatel = UserTypes.User
+                    ID_Tip_Polzovatel = UserTypeIds.User
                 };
 
                 db.Polzovatel.Add(user);
