@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Estetika.Controllers
+using Estetika.Models.Entities; namespace Estetika.Controllers
 {
     public class HomeController : Controller
     {

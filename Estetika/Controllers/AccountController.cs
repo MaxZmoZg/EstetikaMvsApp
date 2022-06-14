@@ -9,13 +9,12 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Estetika;
 using Estetika.Models;
+using Estetika.Models.Entities;
 
 namespace Estetika.Controllers
 {
     public class AccountController : Controller
     {
-        private const string EmailPattern = @"\w+@\w+\.\w{2,3}";
-
         [Authorize]
         public ActionResult Logout()
         {
@@ -64,7 +63,7 @@ namespace Estetika.Controllers
                 {
                     return null;
                 }
-               
+
                 if (Enumerable.SequenceEqual(user.Parol,
                                              model.Password))
                 {
@@ -118,7 +117,7 @@ namespace Estetika.Controllers
 
         private static void CreateNewUser(RegisterModel model)
         {
-            
+
             using (SalonEntities db = new SalonEntities())
             {
 
@@ -130,7 +129,7 @@ namespace Estetika.Controllers
                     Login = model.Login,
                     Imya = model.Login,
                     Telephon = long.Parse(model.PhoneNumber),
-                    ID_Tip_Polzovatel = UserTypes.User
+                    ID_Tip_Polzovatel = UserTypeIds.User
                 };
 
                 db.Polzovatel.Add(user);

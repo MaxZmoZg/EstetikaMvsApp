@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Estetika.Models;
+using Estetika.Models.Entities;
+using Estetika.Models.Exceptions;
+using System;
+using System.Collections.Specialized;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Estetika;
-
 namespace Estetika.Controllers
 {
     public class VoprosController : Controller
     {
-        private SalonEntities db = new SalonEntities();
+        private readonly SalonEntities db = new SalonEntities();
 
         // GET: Vopros
         public ActionResult Index()
@@ -22,20 +22,79 @@ namespace Estetika.Controllers
 
 
         [HttpPost]
-        public ActionResult SendResults()
+        public ActionResult RedirectUserDependingOnChoices()
         {
-            var results = Request.Form;
-            if (results["Какие проблемы у вас с волосами?"] == "ломаются, секутся" && results["Чем из этого вы пользуетесь на постоянной основе?"]== "Фен")
+            NameValueCollection choicesForm = Request.Form;
+
+            TrySaveChoices(choicesForm);
+
+            string hairProblemsChoice = choicesForm["Какие проблемы у вас с волосами?"];
+
+            if (hairProblemsChoice == null)
             {
                 return RedirectToAction("Index", "Sredstva");
             }
             else
             {
-                return RedirectToAction("Index", "Sredstva");
+                return RedirectDependingOnChoice(hairProblemsChoice);
             }
         }
 
+        /// <summary>
+        /// Tries to save the selected choices to the database or throws Exception. 
+        /// The saved choices are not used on the website.
+        /// </summary>
+        /// <param name="choicesCollection">Collection with the selected choices.</param>
+        private void TrySaveChoices(NameValueCollection choicesCollection)
+        {
+            try
+            {
+                SaveChoices(choicesCollection);
+            }
+            catch (DbException ex)
+            {
+                throw new Exception("Cannot save the choices to the db", ex);
+            }
+        }
 
+        private void SaveChoices(NameValueCollection choicesCollection)
+        {
+            foreach (string answerKey in choicesCollection.Keys)
+            {
+                string choiceText = choicesCollection[answerKey];
+                Variant choice = db.Variant.First(v => v.Tekst == choiceText);
+                Otvet answer = new Otvet
+                {
+                    ID_Polzovatel = Me.Get().ID_Polzovatel,
+                    ID_Variant = choice.ID_Variant
+                };
+                db.Otvet.Add(answer);
+                db.SaveChanges();
+            }
+        }
+
+        private ActionResult RedirectDependingOnChoice(string hairProblemsChoice)
+        {
+            if (hairProblemsChoice == "ломаются, секутся")
+            {
+                TempData[nameof(Tovar.ID_Tip_Tovar)] = GoodsTypeIds.Shampoo;
+                return RedirectToAction("Index", "Sredstva");
+            }
+            else if (hairProblemsChoice == "пушатся")
+            {
+                TempData[nameof(Tovar.ID_Tip_Tovar)] = GoodsTypeIds.Elastic;
+                return RedirectToAction("Index", "Sredstva");
+            }
+            else if (hairProblemsChoice == "невозможно расчесать")
+            {
+                TempData[nameof(Tovar.ID_Tip_Tovar)] = GoodsTypeIds.Comb;
+                return RedirectToAction("Index", "Sredstva");
+            }
+            else
+            {
+                throw new ChoiceActionNotFoundException("The hairs problem needs more choices");
+            }
+        }
 
         // GET: Vopros/Details/5
         public ActionResult Details(int? id)

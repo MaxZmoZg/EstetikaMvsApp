@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Estetika.Vopros>
+﻿@using Estetika.Models.Entities; @model IEnumerable<Vopros>
 
 @{
     ViewBag.Title = "Index";
@@ -10,15 +10,14 @@
 <br />
 
 
-@using (Html.BeginForm("SendResults", "Vopros"))
+@using (Html.BeginForm("RedirectUserDependingOnChoices", "Vopros"))
 {
     <ul style=" list-style-type: none;">
-
         @foreach (var item in Model)
         {
-            <li style=" list-style-type: none; e">@item.Zagolovok</li>
+            <li style=" list-style-type: none;">@item.Zagolovok</li>
             <li style=" list-style-type: none;">
-                <ol style=" list-style-type: none; e">
+                <ol style=" list-style-type: none;">
                     @foreach (var option in item.Variant)
                     {
                         <li>@Html.RadioButton(option.Vopros.Zagolovok, option.Tekst) @option.Tekst </li>
@@ -27,7 +26,5 @@
             </li>
         }
     </ul>
-    
     <input style="margin-left:40px;" type="submit" value="Отправить" class="btn btn-default" />
-
 }

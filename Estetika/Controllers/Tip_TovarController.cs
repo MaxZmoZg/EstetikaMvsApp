@@ -8,11 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using Estetika;
 
-namespace Estetika.Controllers
+using Estetika.Models.Entities; namespace Estetika.Controllers
 {
     public class Tip_TovarController : Controller
     {
-        private SalonEntities db = new SalonEntities();
+        private readonly SalonEntities db = new SalonEntities();
 
         // GET: Tip_Tovar
         public ActionResult Index()

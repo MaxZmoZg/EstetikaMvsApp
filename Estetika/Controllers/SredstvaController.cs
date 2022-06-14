@@ -1,40 +1,39 @@
-﻿using System;
+﻿using Estetika.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Estetika;
-
 namespace Estetika.Controllers
 {
     public class SredstvaController : Controller
     {
-        private SalonEntities db = new SalonEntities();
+        private readonly SalonEntities db = new SalonEntities();
 
         // GET: Sredstva
         public ActionResult Index()
         {
-            LoadDropDownLists();
-            var sredstva = db.Tovar
-                .Include(m => m.Tip_Tovar);
-           
-            return View(sredstva.ToList());
+            return GetFilteredItemsActionResult();
         }
+
         private void LoadDropDownLists()
         {
             List<Tip_Tovar> tip_Tovars = db.Tip_Tovar.ToList();
             tip_Tovars.Insert(0, new Tip_Tovar { Imya_Tip_Tovar = "-----" });
             ViewBag.ID_Tip_Tovar = new SelectList(tip_Tovars, "ID_Tip_Tovar", "Imya_Tip_Tovar");
-
-           
         }
 
+        private void LoadDropDownListsWithPredefinedId(int goodsId)
+        {
+            List<Tip_Tovar> tip_Tovars = db.Tip_Tovar.ToList();
+            tip_Tovars.Insert(0, new Tip_Tovar { Imya_Tip_Tovar = "-----" });
+            ViewBag.ID_Tip_Tovar = new SelectList(tip_Tovars, "ID_Tip_Tovar", "Imya_Tip_Tovar", goodsId);
+        }
 
         [HttpPost]
-        public ActionResult Filter()
+        public ActionResult GetFilteredItemsActionResult()
         {
             List<Tovar> filteredTovar = db.Tovar
                 .Include(m => m.Tip_Tovar)
@@ -49,21 +48,27 @@ namespace Estetika.Controllers
                     .ToList();
             }
 
-            if (Request.Form["ID_Tip_Tovar"] is string tipTovaraId && tipTovaraId != "0")
+            if (Request.Form[nameof(Tovar.ID_Tip_Tovar)] is string tipTovaraIdAsString && tipTovaraIdAsString != "0")
             {
-                filteredTovar = filteredTovar.Where(m => m.ID_Tip_Tovar == int.Parse(tipTovaraId))
+                filteredTovar = filteredTovar.Where(m => m.ID_Tip_Tovar == int.Parse(tipTovaraIdAsString))
                     .ToList();
             }
-       
+
+            if (TempData[nameof(Tovar.ID_Tip_Tovar)] is int tipTovaraIdAsInteger && tipTovaraIdAsInteger > 0)
+            {
+                filteredTovar = filteredTovar.Where(m => m.ID_Tip_Tovar == tipTovaraIdAsInteger)
+                    .ToList();
+            }
+
             if (Request.Form.Keys.OfType<string>().Contains("Алфавиту"))
             {
                 filteredTovar = filteredTovar
                     .OrderByDescending(m => m.Imya_Tovar)
                     .ToList();
             }
-            
-           
+
             LoadDropDownLists();
+
             return View("Index", filteredTovar);
         }
 

@@ -148,61 +148,63 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Master.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\Entities\Master.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.Context.cs">
+    <Compile Include="Models\Entities\Otvet.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Otziv.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Polzovatel.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\SalonModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DependentUpon>SalonModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.cs">
+    <Compile Include="Models\Entities\SalonModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SalonModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.Designer.cs">
+    <Compile Include="Models\Entities\SalonModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>SalonModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Models.cs" />
-    <Compile Include="Models\UserTypes.cs" />
-    <Compile Include="Otvet.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\Entities\Tip_Master.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Otziv.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\Entities\Tip_Polzovatel.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Polzovatel.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\Entities\Tip_Tovar.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\Tovar.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Variant.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Vopros.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\Zapis.cs">
+      <DependentUpon>SalonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Exceptions\ChoiceActionNotFoundException.cs" />
+    <Compile Include="Models\GoodsTypeIds.cs" />
+    <Compile Include="Models\IdentityModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Me.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\UserTypeIds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomRoleProvider.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Tip_Master.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Tip_Polzovatel.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Tip_Tovar.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Tovar.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Variant.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Vopros.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Zapis.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -211,22 +213,21 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\StylePage\AddEditZaisStyle.css" />
     <Content Include="Content\StylePage\HomeStyle.css" />
-    <Content Include="Controllers\activ.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Resource Include="Resource\Magnifying_glass_icon.svg.png" />
+    <Content Include="Models\Entities\SalonModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SalonModel.edmx</DependentUpon>
+      <LastGenOutput>SalonModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Entities\SalonModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SalonModel.edmx</DependentUpon>
+      <LastGenOutput>SalonModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Tovars\Create.cshtml" />
     <Content Include="Views\Tovars\Delete.cshtml" />
     <Content Include="Views\Tovars\Details.cshtml" />
@@ -262,14 +263,14 @@
     <Resource Include="Resource\zwnaSldpBgc.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="libman.json" />
+    <EntityDeploy Include="Models\Entities\SalonModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SalonModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Entities\SalonModel.edmx.diagram">
+      <DependentUpon>SalonModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
