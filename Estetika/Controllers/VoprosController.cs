@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Estetika.Models;
+using Estetika.Models.Entities;
+using Estetika.Models.Exceptions;
+using System.Collections.Specialized;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Estetika;
-
-using Estetika.Models.Entities; namespace Estetika.Controllers
+namespace Estetika.Controllers
 {
     public class VoprosController : Controller
     {
@@ -22,20 +21,43 @@ using Estetika.Models.Entities; namespace Estetika.Controllers
 
 
         [HttpPost]
-        public ActionResult SendResults()
+        public ActionResult RedirectUserDependingOnChoices()
         {
-            var results = Request.Form;
-            if (results["Какие проблемы у вас с волосами?"] == "ломаются, секутся" && results["Чем из этого вы пользуетесь на постоянной основе?"]== "Фен")
+            NameValueCollection results = Request.Form;
+            string hairProblemsChoice = results["Какие проблемы у вас с волосами?"];
+
+            if (hairProblemsChoice == null)
             {
                 return RedirectToAction("Index", "Sredstva");
             }
             else
             {
-                return RedirectToAction("Index", "Sredstva");
+                return RedirectDependingOnChoice(hairProblemsChoice);
             }
         }
 
-
+        private ActionResult RedirectDependingOnChoice(string hairProblemsChoice)
+        {
+            if (hairProblemsChoice == "ломаются, секутся")
+            {
+                TempData[nameof(Tovar.ID_Tip_Tovar)] = GoodsTypeIds.Shampoo;
+                return RedirectToAction("Index", "Sredstva");
+            }
+            else if (hairProblemsChoice == "пушатся")
+            {
+                TempData[nameof(Tovar.ID_Tip_Tovar)] = GoodsTypeIds.Elastic;
+                return RedirectToAction("Index", "Sredstva");
+            }
+            else if (hairProblemsChoice == "невозможно расчесать")
+            {
+                TempData[nameof(Tovar.ID_Tip_Tovar)] = GoodsTypeIds.Comb;
+                return RedirectToAction("Index", "Sredstva");
+            }
+            else
+            {
+                throw new ChoiceActionNotFoundException("The hairs problem needs more choices");
+            }
+        }
 
         // GET: Vopros/Details/5
         public ActionResult Details(int? id)

@@ -196,6 +196,8 @@
     <Compile Include="Models\Entities\Zapis.cs">
       <DependentUpon>SalonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Exceptions\ChoiceActionNotFoundException.cs" />
+    <Compile Include="Models\GoodsTypeIds.cs" />
     <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />

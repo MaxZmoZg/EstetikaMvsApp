@@ -4,28 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <br />
 <br />
 <br />
 <h3 style="margin-left:50px;">Товары</h3>
 <hr />
-@using (@Html.BeginForm("Filter", "Sredstva", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (@Html.BeginForm("GetFilteredItemsActionResult", "Sredstva", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div style="display: flex; flex-wrap: wrap;  align-items: flex-end; ">
-
         <div class="bar">
             <div class="bar2">
 
@@ -36,78 +22,64 @@
         </div>
         <div style="display: flex;" class="div_filter ">
             <label class="labelstyle ">Средства</label>
-            @Html.DropDownList("ID_Tip_Tovar", null, htmlAttributes: new { @class = "cb" })
-
+            @Html.DropDownList("ID_Tip_Tovar",
+                selectList: (SelectList)ViewBag.ID_Tip_Tovar, 
+                htmlAttributes: new { @class = "cb" })
         </div>
-        
         <input type="submit" style=" margin-bottom:15px;" name="Искать" value="Найти" class="cb btn btn-default btn_filter ">
     </div>
     <div>
         <label style="color: #a7a7a7; font-size: 14px; ">Сортировать по</label>
         <input type="submit" value="Алфавиту" name="Алфавиту" class="btn_sort btn_sort--margin">
-        
     </div>
 }
 
 
+<div style="display:flex; flex-wrap: wrap;">
+    @foreach (var item in Model)
+    {
+        <div style="grid-template-rows: 70% 30%; margin: 2em; padding-left:125px;">
 
+            <div style="position:relative;">
 
-    <div style="display:flex; flex-wrap: wrap;">
-
-
-        @foreach (var item in Model)
-        {
-
-
-
-            <div style="grid-template-rows: 70% 30%; margin: 2em; padding-left:125px;">
-
-                <div style="position:relative;">
-
-                    @{ if (item.Photo_Tovar == null)
-                        {
-                            <img id='previewImage' class="imgactive" style='width: 150px; height: 150px; border-radius: 50px' src="~/Resource/activ.png" />
-                        }
-                        else
-                        {
-                            @Html.Raw("<img id='previewImage' class='imgactive' style='width:200px; height:200px;' src=\"data:image/jpeg;base64,"
-                                                             + Convert.ToBase64String(item.Photo_Tovar) + "\" />")
-                            @Html.ValidationMessageFor(modelItem => item.Photo_Tovar, "", new { @class = "text-danger" })
-                        }
+                @{ if (item.Photo_Tovar == null)
+                    {
+                        <img id='previewImage' class="imgactive" style='width: 150px; height: 150px; border-radius: 50px' src="~/Resource/activ.png" />
                     }
+                    else
+                    {
+                        @Html.Raw("<img id='previewImage' class='imgactive' style='width:200px; height:200px;' src=\"data:image/jpeg;base64,"
+                                                         + Convert.ToBase64String(item.Photo_Tovar) + "\" />")
+                        @Html.ValidationMessageFor(modelItem => item.Photo_Tovar, "", new { @class = "text-danger" })
+                    }
+                }
 
-
-                </div>
-                <div class="rndclss" style=" width: 350px;  text-align:left;">
-                    <div style="margin-top:10px;">
-                        @Html.ActionLink(item.Imya_Tovar, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle masterstyle" })
-                    </div>
-                    <br />
-                    <div>
-                        @Html.ActionLink(@"" + item.Tip_Tovar.Imya_Tip_Tovar, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
-                    </div>
-                    <div>
-                        @Html.ActionLink(@"" + item.Opisanie_Tovar, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
-                    </div>
-                    <div>
-                        @Html.ActionLink(@"" + item.Prais, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
-                    </div>
-                    <div>
-                        @Html.ActionLink(@"Срок хранения:" + item.Srok_hranen, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
-                    </div>
-                    <div>
-                        @Html.ActionLink(@"Условия хранения:" + item.Uslovia_hranenya, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
-                    </div>
-                    <div>
-                        @Html.ActionLink(@"Маркировка:" + item.Markirofka, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
-                    </div>
-                    <br />
-                    @*<div>
-                            @Html.ActionLink("Записаться", "Create", "Zapis", new { id = item.ID_Master }, new { @class = "btn btn-default btnstyleformasterpage " })
-
-                        </div>*@
-                </div>
             </div>
-        }
-    </div>
-
+            <div class="rndclss" style=" width: 350px;  text-align:left;">
+                <div style="margin-top:10px;">
+                    @Html.ActionLink(item.Imya_Tovar, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle masterstyle" })
+                </div>
+                <br />
+                <div>
+                    @Html.ActionLink(@"" + item.Tip_Tovar.Imya_Tip_Tovar, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
+                </div>
+                <div>
+                    @Html.ActionLink(@"" + item.Opisanie_Tovar, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
+                </div>
+                <div>
+                    @Html.ActionLink(@"" + item.Prais, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
+                </div>
+                <div>
+                    @Html.ActionLink(@"Срок хранения:" + item.Srok_hranen, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
+                </div>
+                <div>
+                    @Html.ActionLink(@"Условия хранения:" + item.Uslovia_hranenya, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
+                </div>
+                <div>
+                    @Html.ActionLink(@"Маркировка:" + item.Markirofka, "Details", new { id = item.ID_Tovar }, new { @class = "textstyle" })
+                </div>
+                <br />
+            </div>
+        </div>
+    }
+</div>
