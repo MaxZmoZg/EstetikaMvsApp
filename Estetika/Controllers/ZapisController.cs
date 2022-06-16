@@ -56,18 +56,17 @@ namespace Estetika.Controllers
         public ActionResult Create([Bind(Include = "ID_Zapis,Data,Vremya,ID_Polzovatel,ID_Master,Activien")] Zapis zapis)
         {
             if (ModelState.IsValid)
-
             {
-                Zapis zapisfrobd = new Zapis
+                Zapis newRequest = new Zapis
                 {
-                    Data = zapis.Data,
-                    Vremya = zapis.Vremya,
+                    Data = zapis.Data.Value,
+                    Vremya = zapis.Vremya.Value,
                     ID_Polzovatel = db.Polzovatel.First(u => u.Login == HttpContext.User.Identity.Name).ID_Polzovatel,
                     ID_Master = zapis.ID_Master,
                     Activien = true
                 };
 
-                db.Zapis.Add(zapisfrobd);
+                db.Zapis.Add(newRequest);
                 db.SaveChanges();
                 return RedirectToAction("Details", "Polzovatels");
             }
