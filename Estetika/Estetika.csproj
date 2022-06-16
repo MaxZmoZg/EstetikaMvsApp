@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MastersAdminController.cs" />
     <Compile Include="Controllers\MastersController.cs" />
     <Compile Include="Controllers\MyZapisController.cs" />
     <Compile Include="Controllers\OtvetsController.cs" />
@@ -230,6 +231,11 @@
     <Content Include="Views\OtzivsAdmin\Details.cshtml" />
     <Content Include="Views\OtzivsAdmin\Edit.cshtml" />
     <Content Include="Views\OtzivsAdmin\Index.cshtml" />
+    <Content Include="Views\MastersAdmin\Create.cshtml" />
+    <Content Include="Views\MastersAdmin\Delete.cshtml" />
+    <Content Include="Views\MastersAdmin\Details.cshtml" />
+    <Content Include="Views\MastersAdmin\Edit.cshtml" />
+    <Content Include="Views\MastersAdmin\Index.cshtml" />
     <Resource Include="Resource\Magnifying_glass_icon.svg.png" />
     <Content Include="Models\Entities\SalonModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

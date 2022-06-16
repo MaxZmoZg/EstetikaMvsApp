@@ -1,0 +1,58 @@
+﻿@model Estetika.Models.Entities.Master
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Master</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Imya_Master)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imya_Master)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opisanie_Master)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opisanie_Master)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tip_Master.Imya_Tip_Master)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tip_Master.Imya_Tip_Master)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Master }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

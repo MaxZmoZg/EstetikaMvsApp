@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Estetika.Models.Entities.Master>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<br />
+<br />
+<h3>Мастера</h3>
+
+
+<table class="table table-striped">
+    <tr>
+        <th class="tdbackground">
+           ФИО мастера
+        </th>
+        <th class="tdbackground">
+            Описание мастера
+        </th>
+        <th class="tdbackground">
+            Фото
+        </th>
+        <th class="tdbackground">
+            Опыт работы
+        </th>
+        <th class="tdbackground">
+           Тип мастера
+        </th>
+        <th class="tdbackground"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imya_Master)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Opisanie_Master)
+        </td>
+        <td>
+            @{ if (item.Photo == null)
+                {
+                    <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/userphoto.png" />
+                }
+                else
+                {
+                    @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
+                                                         + Convert.ToBase64String(item.Photo) + "\" />")
+                    @Html.ValidationMessageFor(modelItem => item.Photo, "", new { @class = "text-danger" })
+                }
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Opit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tip_Master.Imya_Tip_Master)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.ID_Master }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Master })
+        </td>
+    </tr>
+}
+
+</table>
+<button class=" btn btn-default stylebuttonfortableadd ">
+
+
+    @Html.ActionLink("Добавить мастера", "Create", new { @class = "fontcolor " })
+
+</button>
