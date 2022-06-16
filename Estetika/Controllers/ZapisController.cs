@@ -147,8 +147,15 @@ namespace Estetika.Controllers
             base.Dispose(disposing);
         }
 
-
-
-
+        public ActionResult CancelRequest(int requestId)
+        {
+            using (SalonEntities entities = new SalonEntities())
+            {
+                Zapis request = entities.Zapis.Find(requestId);
+                request.Activien = false;
+                entities.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
