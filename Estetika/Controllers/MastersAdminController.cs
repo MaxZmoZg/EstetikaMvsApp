@@ -92,10 +92,14 @@ namespace Estetika.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Master,Imya_Master,Opisanie_Master,Photo,Opit,ID_Tip_Master")] Master master)
+        public ActionResult Edit([Bind(Include = "ID_Master,Imya_Master,Opisanie_Master,Photo,Opit,ID_Tip_Master")] Master master, HttpPostedFileBase goodsImage)
         {
             if (ModelState.IsValid)
             {
+                if (goodsImage != null)
+                {
+                    master.Photo = goodsImage.ToByteArray();
+                }
                 db.Entry(master).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

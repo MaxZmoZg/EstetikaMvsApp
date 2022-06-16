@@ -146,6 +146,7 @@
     <Compile Include="Controllers\VariantsController.cs" />
     <Compile Include="Controllers\VoprosAdminController.cs" />
     <Compile Include="Controllers\VoprosController.cs" />
+    <Compile Include="Controllers\ZapisAdminController.cs" />
     <Compile Include="Controllers\ZapisController.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,6 +238,11 @@
     <Content Include="Views\MastersAdmin\Details.cshtml" />
     <Content Include="Views\MastersAdmin\Edit.cshtml" />
     <Content Include="Views\MastersAdmin\Index.cshtml" />
+    <Content Include="Views\ZapisAdmin\Create.cshtml" />
+    <Content Include="Views\ZapisAdmin\Delete.cshtml" />
+    <Content Include="Views\ZapisAdmin\Details.cshtml" />
+    <Content Include="Views\ZapisAdmin\Edit.cshtml" />
+    <Content Include="Views\ZapisAdmin\Index.cshtml" />
     <Resource Include="Resource\Magnifying_glass_icon.svg.png" />
     <Content Include="Models\Entities\SalonModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

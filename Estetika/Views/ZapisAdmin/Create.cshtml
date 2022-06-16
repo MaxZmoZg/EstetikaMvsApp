@@ -1,0 +1,81 @@
+﻿@model Estetika.Models.Entities.Zapis
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Записать клиентов</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2">Дата записи</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control radiusinput", @type = "date" } })
+            @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Время записи</label>
+            <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.Vremya, "", new { @class = "text-danger" })
+                <ul style=" list-style-type: none; margin-top:20px; margin-left:-25px; ">
+
+                    <li>@Html.RadioButtonFor(request => request.Vremya, TimeSpan.FromHours(8), new { htmlAttributes = new { @class = "rdbtn" } }) 8:00  </li>
+                    <li>@Html.RadioButtonFor(request => request.Vremya, TimeSpan.FromHours(10), new { htmlAttributes = new { @class = "rdbtn" } }) 10:00 </li>
+                    <li>@Html.RadioButtonFor(request => request.Vremya, TimeSpan.FromHours(13), new { htmlAttributes = new { @class = "rdbtn" } }) 13:00  </li>
+                    <li>@Html.RadioButtonFor(request => request.Vremya, TimeSpan.FromHours(15), new { htmlAttributes = new { @class = "rdbtn" } }) 15:00  </li>
+                    <li>@Html.RadioButtonFor(request => request.Vremya, TimeSpan.FromHours(17), new { htmlAttributes = new { @class = "rdbtn" } }) 17:00  </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Пользователь</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ID_Polzovatel", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_Polzovatel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Мастер</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ID_Master", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_Master, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Активность</label>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Activien)
+                    @Html.ValidationMessageFor(model => model.Activien, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Добавить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Вернуться", "Index", "Zapis")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
