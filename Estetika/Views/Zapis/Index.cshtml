@@ -37,43 +37,49 @@
         <th class="tdbackground"></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Polzovatel.Imya) @Html.DisplayFor(modelItem => item.Polzovatel.Phamilia)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Polzovatel.Telephon)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Master.Imya_Master)
-    </td>
-    <td>
-        @(item.Data)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Vremya)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Activien)
-    </td>
-    <td>
-        <button id="ZapicEdit"   class="btn btn-default stylebuttonfortable">Отменить</button>
-    </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Polzovatel.Imya) @Html.DisplayFor(modelItem => item.Polzovatel.Phamilia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Polzovatel.Telephon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Master.Imya_Master)
+            </td>
+            <td>
+                @(item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vremya)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activien)
+            </td>
+            <td>
+                @Html.ActionLink(
+               "Отменить",
+               "CancelRequest",
+               nameof(Zapis),
+               routeValues: new { requestId = item.ID_Zapis },
+               htmlAttributes: new { @class = "btn btn-default stylebuttonfortable" })
+            </td>
 
 
 
-    <td>
-        @Html.ActionLink("Изменить", "Edit", new { id = item.ID_Zapis }) |
-       
-        @Html.ActionLink("Удалить", "Delete", new { id = item.ID_Zapis })
-    </td>
-</tr>
-}
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.ID_Zapis }) |
+
+                @Html.ActionLink("Удалить", "Delete", new { id = item.ID_Zapis })
+            </td>
+        </tr>
+    }
 
 </table>
 <button class=" btn btn-default stylebuttonfortableadd ">
-    
-        @Html.ActionLink("Добавить", "Create, ", new {@class = "fontcolor " })
-   
+
+    @Html.ActionLink("Добавить", "Create, ", new { @class = "fontcolor " })
+
 </button>
