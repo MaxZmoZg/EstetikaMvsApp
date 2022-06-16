@@ -4,17 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<br />
+<br />
+<br />
+<h3>Добавить тип мастера</h3>
+<table class="table table-striped">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Imya_Tip_Master)
+        <th  class="tdbackground">
+            Тип мастера
         </th>
-        <th></th>
+        <th class="tdbackground"></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -23,11 +22,16 @@
             @Html.DisplayFor(modelItem => item.Imya_Tip_Master)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Tip_Master }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Tip_Master }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Tip_Master })
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID_Tip_Master }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Tip_Master })
         </td>
     </tr>
 }
 
 </table>
+<button class=" btn btn-default stylebuttonfortableadd ">
+
+    @Html.ActionLink("Добавить тип мастера  ", "Create", new { @class = "fontcolor " })
+
+
+</button>
