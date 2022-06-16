@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Estetika.Models.Entities.Otziv>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<br />
+<br />
+
+<h2>Комментарии</h2>
+
+
+<table class="table">
+    <tr>
+        <th class="tdbackground">
+            Комментарий
+        </th>
+        <th class="tdbackground">
+            Пользователь
+        </th>
+        <th class="tdbackground"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Napisanny_Otziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Polzovatel.Imya)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID_Otziv }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Otziv })
+        </td>
+    </tr>
+}
+
+</table>
+<button class=" btn btn-default stylebuttonfortableadd ">
+
+    @Html.ActionLink("Добавить комментарий", "Create", new { @class = "fontcolor " })
+
+
+</button>

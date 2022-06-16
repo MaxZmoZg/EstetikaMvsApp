@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Estetika.Models.Entities.Vopros>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<br />
+<br />
+
+<h2>Вопросы к анализу</h2>
+
+
+<table class="table table-striped">
+    <tr>
+        <th class="tdbackground">
+            Вопрос
+        </th>
+        <th class="tdbackground"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zagolovok)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID_Vopros }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Vopros })
+        </td>
+    </tr>
+}
+
+</table>
+<button class=" btn btn-default stylebuttonfortableadd ">
+
+
+    @Html.ActionLink("Добавить вопросы", "Create", new { @class = "fontcolor " })
+
+</button>

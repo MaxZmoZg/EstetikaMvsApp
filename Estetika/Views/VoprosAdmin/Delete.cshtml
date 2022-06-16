@@ -1,4 +1,4 @@
-﻿@using Estetika.Models.Entities; @model Tip_Polzovatel
+﻿@model Estetika.Models.Entities.Vopros
 
 @{
     ViewBag.Title = "Delete";
@@ -6,18 +6,17 @@
 
 <h2>Delete</h2>
 
-<h3>Удалить тип пользователя?</h3>
+<h3>Удалить вопрос?</h3>
 <div>
 
     <hr />
-   
-
+    
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Удалить" class="btn btn-default" /> |
-            @Html.ActionLink("Вернуться", "Index","", htmlAttributes: (new { @class = "btn btn-default" }))
+            @Html.ActionLink("Вернуться", "Index", "", htmlAttributes: (new { @class = "btn btn-default" }))
         </div>
     }
 </div>

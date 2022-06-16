@@ -134,6 +134,7 @@
     <Compile Include="Controllers\MastersController.cs" />
     <Compile Include="Controllers\MyZapisController.cs" />
     <Compile Include="Controllers\OtvetsController.cs" />
+    <Compile Include="Controllers\OtzivsAdminController.cs" />
     <Compile Include="Controllers\OtzivsController.cs" />
     <Compile Include="Controllers\PolzovatelsController.cs" />
     <Compile Include="Controllers\SredstvaController.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Controllers\Tip_TovarController.cs" />
     <Compile Include="Controllers\TovarsController.cs" />
     <Compile Include="Controllers\VariantsController.cs" />
+    <Compile Include="Controllers\VoprosAdminController.cs" />
     <Compile Include="Controllers\VoprosController.cs" />
     <Compile Include="Controllers\ZapisController.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
@@ -217,6 +219,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Views\VoprosAdmin\Create.cshtml" />
+    <Content Include="Views\VoprosAdmin\Delete.cshtml" />
+    <Content Include="Views\VoprosAdmin\Details.cshtml" />
+    <Content Include="Views\VoprosAdmin\Edit.cshtml" />
+    <Content Include="Views\VoprosAdmin\Index.cshtml" />
+    <Content Include="Views\OtzivsAdmin\Create.cshtml" />
+    <Content Include="Views\OtzivsAdmin\Delete.cshtml" />
+    <Content Include="Views\OtzivsAdmin\Details.cshtml" />
+    <Content Include="Views\OtzivsAdmin\Edit.cshtml" />
+    <Content Include="Views\OtzivsAdmin\Index.cshtml" />
     <Resource Include="Resource\Magnifying_glass_icon.svg.png" />
     <Content Include="Models\Entities\SalonModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

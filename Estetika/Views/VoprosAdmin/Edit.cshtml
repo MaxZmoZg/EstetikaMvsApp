@@ -1,4 +1,4 @@
-﻿@using Estetika.Models.Entities; @model Tip_Tovar
+﻿@model Estetika.Models.Entities.Vopros
 
 @{
     ViewBag.Title = "Edit";
@@ -12,17 +12,17 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Редактировать тип товара</h4>
+        <h4>Изменить вопросы к анализу</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID_Tip_Tovar)
+        @Html.HiddenFor(model => model.ID_Vopros)
 
     <div class="form-group">
-        <label class="control-label col-md-2">Тип товара</label>
-     
+        <label class="control-label col-md-2">Содержание вопроса</label>
+        
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Imya_Tip_Tovar, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Imya_Tip_Tovar, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Zagolovok, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Zagolovok, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -35,7 +35,7 @@
 }
 
 <div>
-    @Html.ActionLink("Вернуться", "Index")
+    @Html.ActionLink("Вернутсься", "Index")
 </div>
 
 @section Scripts {

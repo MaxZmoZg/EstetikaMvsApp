@@ -12,13 +12,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Tovar</h4>
+        <h4>Редактировать товар</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID_Tovar)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Imya_Tovar, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Название товара</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Imya_Tovar, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Imya_Tovar, "", new { @class = "text-danger" })
@@ -26,15 +26,29 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Photo_Tovar, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Фото товара</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Photo_Tovar, new { htmlAttributes = new { @class = "form-control" } })
+                @{ if (Model.Photo_Tovar == null)
+                    {
+                        <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/userphoto.png" />
+                    }
+                    else
+                    {
+                        @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
+                                                             + Convert.ToBase64String(Model.Photo_Tovar) + "\" />")
+
+                    }
+                }
                 @Html.ValidationMessageFor(model => model.Photo_Tovar, "", new { @class = "text-danger" })
+            </div>
+            <div class="editor-field">
+                <input id="imageInput" type="file" name="uploadImage" />
+
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ID_Tip_Tovar, "ID_Tip_Tovar", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Тип товара</label>
             <div class="col-md-10">
                 @Html.DropDownList("ID_Tip_Tovar", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ID_Tip_Tovar, "", new { @class = "text-danger" })
@@ -42,7 +56,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Prais, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Цена</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Prais, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Prais, "", new { @class = "text-danger" })
@@ -50,7 +64,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Opisanie_Tovar, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Описание товара</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Opisanie_Tovar, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Opisanie_Tovar, "", new { @class = "text-danger" })
@@ -58,7 +72,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ID_Polzovatel, "ID_Polzovatel", htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Пользователь</label>
             <div class="col-md-10">
                 @Html.DropDownList("ID_Polzovatel", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ID_Polzovatel, "", new { @class = "text-danger" })
@@ -66,7 +80,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Srok_hranen, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Срок хранения</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Srok_hranen, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Srok_hranen, "", new { @class = "text-danger" })
@@ -74,7 +88,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Markirofka, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Маркировка</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Markirofka, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Markirofka, "", new { @class = "text-danger" })
@@ -82,7 +96,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Uslovia_hranenya, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Условия хранения</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Uslovia_hranenya, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Uslovia_hranenya, "", new { @class = "text-danger" })
@@ -91,14 +105,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Сохранить" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Вернуться", "Index")
 </div>
 
 @section Scripts {

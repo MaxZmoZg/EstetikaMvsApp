@@ -6,133 +6,116 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Estetika.Models.Entities;
 
-using Estetika;
-
-using Estetika.Models.Entities; namespace Estetika.Controllers
+namespace Estetika.Controllers
 {
-    public class ZapisController : Controller
+    public class OtzivsAdminController : Controller
     {
-        private readonly SalonEntities db = new SalonEntities();
+        private SalonEntities db = new SalonEntities();
 
-        // GET: Zapis
+        // GET: OtzivsAdmin
         public ActionResult Index()
         {
-            var zapis = db.Zapis.Include(z => z.Master).Include(z => z.Polzovatel);
-            return View(zapis.ToList());
+            var otziv = db.Otziv.Include(o => o.Polzovatel);
+            return View(otziv.ToList());
         }
 
-        // GET: Zapis/Details/5
+        // GET: OtzivsAdmin/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Zapis zapis = db.Zapis.Find(id);
-            if (zapis == null)
+            Otziv otziv = db.Otziv.Find(id);
+            if (otziv == null)
             {
                 return HttpNotFound();
             }
-            return View(zapis);
+            return View(otziv);
         }
 
-        // GET: Zapis/Create
+        // GET: OtzivsAdmin/Create
         public ActionResult Create()
         {
-
-            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master");
             ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya");
             return View();
         }
 
-        // POST: Zapis/Create
+        // POST: OtzivsAdmin/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Create([Bind(Include = "ID_Zapis,Data,Vremya,ID_Polzovatel,ID_Master,Activien")] Zapis zapis)
+        public ActionResult Create([Bind(Include = "ID_Otziv,Napisanny_Otziv,ID_Polzovatel")] Otziv otziv)
         {
             if (ModelState.IsValid)
-
             {
-                Zapis zapisfrobd = new Zapis
-                {
-                    Data = zapis.Data,
-                    Vremya = zapis.Vremya,
-                    ID_Polzovatel = db.Polzovatel.First(u => u.Login == HttpContext.User.Identity.Name).ID_Polzovatel,
-                    ID_Master = zapis.ID_Master,
-                    Activien = true
-                };
-
-                db.Zapis.Add(zapisfrobd);
+                db.Otziv.Add(otziv);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Polzovatels");
+                return RedirectToAction("Index");
             }
 
-            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", zapis.ID_Master);
-            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", zapis.ID_Polzovatel);
-            return View(zapis);
+            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", otziv.ID_Polzovatel);
+            return View(otziv);
         }
 
-        // GET: Zapis/Edit/5
+        // GET: OtzivsAdmin/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Zapis zapis = db.Zapis.Find(id);
-            if (zapis == null)
+            Otziv otziv = db.Otziv.Find(id);
+            if (otziv == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", zapis.ID_Master);
-            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", zapis.ID_Polzovatel);
-            return View(zapis);
+            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", otziv.ID_Polzovatel);
+            return View(otziv);
         }
 
-        // POST: Zapis/Edit/5
+        // POST: OtzivsAdmin/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Zapis,Data,Vremya,ID_Polzovatel,ID_Master,Activien")] Zapis zapis)
+        public ActionResult Edit([Bind(Include = "ID_Otziv,Napisanny_Otziv,ID_Polzovatel")] Otziv otziv)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(zapis).State = EntityState.Modified;
+                db.Entry(otziv).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", zapis.ID_Master);
-            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", zapis.ID_Polzovatel);
-            return View(zapis);
+            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", otziv.ID_Polzovatel);
+            return View(otziv);
         }
 
-        // GET: Zapis/Delete/5
+        // GET: OtzivsAdmin/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Zapis zapis = db.Zapis.Find(id);
-            if (zapis == null)
+            Otziv otziv = db.Otziv.Find(id);
+            if (otziv == null)
             {
                 return HttpNotFound();
             }
-            return View(zapis);
+            return View(otziv);
         }
 
-        // POST: Zapis/Delete/5
+        // POST: OtzivsAdmin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Zapis zapis = db.Zapis.Find(id);
-            db.Zapis.Remove(zapis);
+            Otziv otziv = db.Otziv.Find(id);
+            db.Otziv.Remove(otziv);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -145,9 +128,5 @@ using Estetika.Models.Entities; namespace Estetika.Controllers
             }
             base.Dispose(disposing);
         }
-
-
-       
-
     }
 }

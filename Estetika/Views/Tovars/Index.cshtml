@@ -4,41 +4,43 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br />
+<br />
+<br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<h3>Товар</h3>
+
+
+<table class="table table-striped">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Imya_Tovar)
+        <th class="tdbackground">
+            Имя товара
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Photo_Tovar)
+        <th class="tdbackground">
+            Фото товара
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prais)
+        <th class="tdbackground">
+            Цена
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Opisanie_Tovar)
+        <th class="tdbackground">
+           Описание товара
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Srok_hranen)
+        <th class="tdbackground">
+           Срок хранения
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Markirofka)
+        <th class="tdbackground">
+            Маркировка
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Uslovia_hranenya)
+        <th class="tdbackground">
+            Условия хранения
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Polzovatel.Imya)
+        <th class="tdbackground">
+           Товар добавил
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tip_Tovar.Imya_Tip_Tovar)
+        <th class="tdbackground">
+           Тип товары
         </th>
-        <th></th>
+        <th class="tdbackground"></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -81,11 +83,16 @@
             @Html.DisplayFor(modelItem => item.Tip_Tovar.Imya_Tip_Tovar)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Tovar }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Tovar }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Tovar })
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID_Tovar }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID_Tovar })
         </td>
     </tr>
 }
 
 </table>
+<button class=" btn btn-default stylebuttonfortableadd ">
+
+
+    @Html.ActionLink("Добавить товары", "Create", new { @class = "fontcolor " })
+
+</button>

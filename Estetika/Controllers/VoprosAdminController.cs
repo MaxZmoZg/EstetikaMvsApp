@@ -6,133 +6,111 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Estetika.Models.Entities;
 
-using Estetika;
-
-using Estetika.Models.Entities; namespace Estetika.Controllers
+namespace Estetika.Controllers
 {
-    public class ZapisController : Controller
+    public class VoprosAdminController : Controller
     {
-        private readonly SalonEntities db = new SalonEntities();
+        private SalonEntities db = new SalonEntities();
 
-        // GET: Zapis
+        // GET: VoprosAdmin
         public ActionResult Index()
         {
-            var zapis = db.Zapis.Include(z => z.Master).Include(z => z.Polzovatel);
-            return View(zapis.ToList());
+            return View(db.Vopros.ToList());
         }
 
-        // GET: Zapis/Details/5
+        // GET: VoprosAdmin/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Zapis zapis = db.Zapis.Find(id);
-            if (zapis == null)
+            Vopros vopros = db.Vopros.Find(id);
+            if (vopros == null)
             {
                 return HttpNotFound();
             }
-            return View(zapis);
+            return View(vopros);
         }
 
-        // GET: Zapis/Create
+        // GET: VoprosAdmin/Create
         public ActionResult Create()
         {
-
-            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master");
-            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya");
             return View();
         }
 
-        // POST: Zapis/Create
+        // POST: VoprosAdmin/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Create([Bind(Include = "ID_Zapis,Data,Vremya,ID_Polzovatel,ID_Master,Activien")] Zapis zapis)
+        public ActionResult Create([Bind(Include = "ID_Vopros,Zagolovok")] Vopros vopros)
         {
             if (ModelState.IsValid)
-
             {
-                Zapis zapisfrobd = new Zapis
-                {
-                    Data = zapis.Data,
-                    Vremya = zapis.Vremya,
-                    ID_Polzovatel = db.Polzovatel.First(u => u.Login == HttpContext.User.Identity.Name).ID_Polzovatel,
-                    ID_Master = zapis.ID_Master,
-                    Activien = true
-                };
-
-                db.Zapis.Add(zapisfrobd);
+                db.Vopros.Add(vopros);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Polzovatels");
+                return RedirectToAction("Index");
             }
 
-            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", zapis.ID_Master);
-            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", zapis.ID_Polzovatel);
-            return View(zapis);
+            return View(vopros);
         }
 
-        // GET: Zapis/Edit/5
+        // GET: VoprosAdmin/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Zapis zapis = db.Zapis.Find(id);
-            if (zapis == null)
+            Vopros vopros = db.Vopros.Find(id);
+            if (vopros == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", zapis.ID_Master);
-            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", zapis.ID_Polzovatel);
-            return View(zapis);
+            return View(vopros);
         }
 
-        // POST: Zapis/Edit/5
+        // POST: VoprosAdmin/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Zapis,Data,Vremya,ID_Polzovatel,ID_Master,Activien")] Zapis zapis)
+        public ActionResult Edit([Bind(Include = "ID_Vopros,Zagolovok")] Vopros vopros)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(zapis).State = EntityState.Modified;
+                db.Entry(vopros).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", zapis.ID_Master);
-            ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya", zapis.ID_Polzovatel);
-            return View(zapis);
+            return View(vopros);
         }
 
-        // GET: Zapis/Delete/5
+        // GET: VoprosAdmin/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Zapis zapis = db.Zapis.Find(id);
-            if (zapis == null)
+            Vopros vopros = db.Vopros.Find(id);
+            if (vopros == null)
             {
                 return HttpNotFound();
             }
-            return View(zapis);
+            return View(vopros);
         }
 
-        // POST: Zapis/Delete/5
+        // POST: VoprosAdmin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Zapis zapis = db.Zapis.Find(id);
-            db.Zapis.Remove(zapis);
+            Vopros vopros = db.Vopros.Find(id);
+            db.Vopros.Remove(vopros);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -145,9 +123,5 @@ using Estetika.Models.Entities; namespace Estetika.Controllers
             }
             base.Dispose(disposing);
         }
-
-
-       
-
     }
 }

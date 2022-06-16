@@ -1,39 +1,48 @@
 ﻿@using Estetika.Models.Entities; @model IEnumerable<Variant>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Вопросы на ответы | BETAHAIR";
 }
 
-<h2>Index</h2>
+<br />
+<br />
+<br />
+<h2>Вопросы на ответы</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+
+<table class="table  table-striped">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Tekst)
+        <th class="tdbackground">
+            Вопрос
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vopros.Zagolovok)
+        <th class="tdbackground">
+            Вариант ответа
         </th>
-        <th></th>
+
+        <th class="tdbackground"></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tekst)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vopros.Zagolovok)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Variant }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Variant }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Variant })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vopros.Zagolovok)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tekst)
+            </td>
+
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.ID_Variant }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.ID_Variant })
+            </td>
+        </tr>
+    }
 
 </table>
+<button class=" btn btn-default stylebuttonfortableadd ">
+
+
+    @Html.ActionLink("Создавть варинанты на вопросы", "Create", new { @class = "fontcolor " })
+
+</button>
