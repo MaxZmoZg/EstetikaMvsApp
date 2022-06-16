@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Estetika.Models.Entities;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-
-using Estetika;
-
-using Estetika.Models.Entities; namespace Estetika.Controllers
+namespace Estetika.Controllers
 {
     public class ZapisController : Controller
     {
@@ -38,10 +32,17 @@ using Estetika.Models.Entities; namespace Estetika.Controllers
         }
 
         // GET: Zapis/Create
-        public ActionResult Create()
+        public ActionResult Create(int id = 0)
         {
+            if (id > 0)
+            {
+                ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", db.Master.First(m => m.ID_Master == id).ID_Master);
+            }
+            else
+            {
+                ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master", db.Master.First().ID_Master);
+            }
 
-            ViewBag.ID_Master = new SelectList(db.Master, "ID_Master", "Imya_Master");
             ViewBag.ID_Polzovatel = new SelectList(db.Polzovatel, "ID_Polzovatel", "Imya");
             return View();
         }
@@ -55,18 +56,17 @@ using Estetika.Models.Entities; namespace Estetika.Controllers
         public ActionResult Create([Bind(Include = "ID_Zapis,Data,Vremya,ID_Polzovatel,ID_Master,Activien")] Zapis zapis)
         {
             if (ModelState.IsValid)
-
             {
-                Zapis zapisfrobd = new Zapis
+                Zapis newRequest = new Zapis
                 {
-                    Data = zapis.Data,
-                    Vremya = zapis.Vremya,
+                    Data = zapis.Data.Value,
+                    Vremya = zapis.Vremya.Value,
                     ID_Polzovatel = db.Polzovatel.First(u => u.Login == HttpContext.User.Identity.Name).ID_Polzovatel,
                     ID_Master = zapis.ID_Master,
                     Activien = true
                 };
 
-                db.Zapis.Add(zapisfrobd);
+                db.Zapis.Add(newRequest);
                 db.SaveChanges();
                 return RedirectToAction("Details", "Polzovatels");
             }
@@ -146,8 +146,15 @@ using Estetika.Models.Entities; namespace Estetika.Controllers
             base.Dispose(disposing);
         }
 
-
-       
-
+        public ActionResult CancelRequest(int requestId)
+        {
+            using (SalonEntities entities = new SalonEntities())
+            {
+                Zapis request = entities.Zapis.Find(requestId);
+                request.Activien = false;
+                entities.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
