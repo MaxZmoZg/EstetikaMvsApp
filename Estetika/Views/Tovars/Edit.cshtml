@@ -7,10 +7,10 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Tovars", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+    @Html.HiddenFor(m => m.Photo_Tovar)
     <div class="form-horizontal">
         <h4>Редактировать товар</h4>
         <hr />
@@ -30,20 +30,20 @@
             <div class="col-md-10">
                 @{ if (Model.Photo_Tovar == null)
                     {
-                        <img id='previewImage' class="imgactive" style='width:150px; height:150px;' src="~/Resource/userphoto.png" />
+                        <img id='previewImage' class="imgactive"
+                             style='width:150px; height:150px;' src="~/Resource/userphoto.png" />
                     }
                     else
                     {
-                        @Html.Raw("<img id='previewImage' class='imgactive' style='width:150px; height:150px;' src=\"data:image/jpeg;base64,"
-                                                             + Convert.ToBase64String(Model.Photo_Tovar) + "\" />")
-
+                        <img id='previewImage' class='imgactive'
+                             style='width:150px; height:150px;'
+                             src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photo_Tovar)" />
                     }
                 }
                 @Html.ValidationMessageFor(model => model.Photo_Tovar, "", new { @class = "text-danger" })
             </div>
             <div class="editor-field">
-                <input id="imageInput" type="file" name="uploadImage" />
-
+                <input id="imageInput" type="file" name="goodsImage" />
             </div>
         </div>
 
@@ -117,4 +117,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/image-previewer.js")
 }

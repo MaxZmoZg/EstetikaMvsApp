@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Estetika.Models.Entities;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Estetika;
-
-using Estetika.Models.Entities; namespace Estetika.Controllers
+namespace Estetika.Controllers
 {
     public class TovarsController : Controller
     {
@@ -95,10 +91,14 @@ using Estetika.Models.Entities; namespace Estetika.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Tovar,Imya_Tovar,Photo_Tovar,ID_Tip_Tovar,Prais,Opisanie_Tovar,ID_Polzovatel,Srok_hranen,Markirofka,Uslovia_hranenya")] Tovar tovar)
+        public ActionResult Edit([Bind(Include = "ID_Tovar,Imya_Tovar,Photo_Tovar,ID_Tip_Tovar,Prais,Opisanie_Tovar,ID_Polzovatel,Srok_hranen,Markirofka,Uslovia_hranenya")] Tovar tovar, HttpPostedFileBase goodsImage)
         {
             if (ModelState.IsValid)
             {
+                if (goodsImage != null)
+                {
+                    tovar.Photo_Tovar = goodsImage.ToByteArray();
+                }
                 db.Entry(tovar).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
