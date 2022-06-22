@@ -5,27 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f419de927ffe41cc95e77601848a626f" Name="Diagram1">
-        <EntityTypeShape EntityType="SalonModel.Master" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SalonModel.Otvet" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SalonModel.Otziv" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SalonModel.Polzovatel" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SalonModel.Tip_Master" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SalonModel.Tip_Polzovatel" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SalonModel.Tip_Tovar" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SalonModel.Tovar" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SalonModel.Variant" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SalonModel.Vopros" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SalonModel.Zapis" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
-        <AssociationConnector Association="SalonModel.FK_Master_Tip_Master" ManuallyRouted="false" />
-        <AssociationConnector Association="SalonModel.FK_Zapis_Master" ManuallyRouted="false" />
-        <AssociationConnector Association="SalonModel.FK_Otvet_Polzovatel" ManuallyRouted="false" />
-        <AssociationConnector Association="SalonModel.FK_Otvet_Variant" ManuallyRouted="false" />
-        <AssociationConnector Association="SalonModel.FK_Otziv_Polzovatel" ManuallyRouted="false" />
-        <AssociationConnector Association="SalonModel.FK_Polzovatel_Tip_Polzovatel" ManuallyRouted="false" />
-        <AssociationConnector Association="SalonModel.FK_Tovar_Polzovatel" ManuallyRouted="false" />
-        <AssociationConnector Association="SalonModel.FK_Zapis_Polzovatel" ManuallyRouted="false" />
-        <AssociationConnector Association="SalonModel.FK_Tovar_Tip_Tovar" ManuallyRouted="false" />
-        <AssociationConnector Association="SalonModel.FK_Variant_Vopros" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SalonModel.Master" Width="1.5" PointX="3" PointY="2.125" />
+        <EntityTypeShape EntityType="SalonModel.Otvet" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="SalonModel.Otziv" Width="1.5" PointX="5.25" PointY="16.625" />
+        <EntityTypeShape EntityType="SalonModel.Polzovatel" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="SalonModel.Tip_Master" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="SalonModel.Tip_Polzovatel" Width="1.5" PointX="0.75" PointY="6.625" />
+        <EntityTypeShape EntityType="SalonModel.Tip_Tovar" Width="1.5" PointX="6" PointY="9.625" />
+        <EntityTypeShape EntityType="SalonModel.Tovar" Width="1.5" PointX="8.25" PointY="5.75" />
+        <EntityTypeShape EntityType="SalonModel.Variant" Width="1.5" PointX="3" PointY="10.375" />
+        <EntityTypeShape EntityType="SalonModel.Vopros" Width="1.5" PointX="0.75" PointY="10.625" />
+        <EntityTypeShape EntityType="SalonModel.Zapis" Width="1.5" PointX="5.25" PointY="3.125" />
+        <AssociationConnector Association="SalonModel.FK_Master_Tip_Master" />
+        <AssociationConnector Association="SalonModel.FK_Zapis_Master" />
+        <AssociationConnector Association="SalonModel.FK_Otvet_Polzovatel" />
+        <AssociationConnector Association="SalonModel.FK_Otvet_Variant" />
+        <AssociationConnector Association="SalonModel.FK_Otziv_Polzovatel" />
+        <AssociationConnector Association="SalonModel.FK_Polzovatel_Tip_Polzovatel" />
+        <AssociationConnector Association="SalonModel.FK_Tovar_Polzovatel" />
+        <AssociationConnector Association="SalonModel.FK_Zapis_Polzovatel" />
+        <AssociationConnector Association="SalonModel.FK_Tovar_Tip_Tovar" />
+        <AssociationConnector Association="SalonModel.FK_Variant_Vopros" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

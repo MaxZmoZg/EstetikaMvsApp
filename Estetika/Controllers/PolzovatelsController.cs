@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Estetika.Models.Entities;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Estetika;
-
-using Estetika.Models.Entities; namespace Estetika.Controllers
+namespace Estetika.Controllers
 {
     public class PolzovatelsController : Controller
     {
@@ -17,7 +13,9 @@ using Estetika.Models.Entities; namespace Estetika.Controllers
         // GET: Polzovatels
         public ActionResult Index()
         {
-            var polzovatel = db.Polzovatel.Include(p => p.Tip_Polzovatel);
+            var polzovatel = db.Polzovatel
+                .Include(p => p.Tip_Polzovatel)
+                .Where(u => !u.IsDeleted);
             return View(polzovatel.ToList());
         }
 
@@ -26,7 +24,7 @@ using Estetika.Models.Entities; namespace Estetika.Controllers
         [Authorize]
         public ActionResult Details(string login)
         {
-             if (login == null)
+            if (login == null)
             {
                 return View(
                     db.Polzovatel.First(u => u.Login == HttpContext.User.Identity.Name));
@@ -113,8 +111,8 @@ using Estetika.Models.Entities; namespace Estetika.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Polzovatel polzovatel = db.Polzovatel.Find(id);
-            db.Polzovatel.Remove(polzovatel);
+            Polzovatel user = db.Polzovatel.Find(id);
+            user.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
