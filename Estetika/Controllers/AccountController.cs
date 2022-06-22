@@ -40,6 +40,10 @@ namespace Estetika.Controllers
                 bool isUserFound = user != null;
                 if (isUserFound)
                 {
+                    if (user.IsDeleted)
+                    {
+                        return RedirectToAction("Register");
+                    }
                     FormsAuthentication.SetAuthCookie(model.Login, true);
                     return RedirectToAction("Index", "Home");
                 }

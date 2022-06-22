@@ -31,6 +31,7 @@ namespace Estetika.Models.Entities
         public string Login { get; set; }
         public string Parol { get; set; }
         public int ID_Tip_Polzovatel { get; set; }
+        public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Otvet> Otvet { get; set; }
