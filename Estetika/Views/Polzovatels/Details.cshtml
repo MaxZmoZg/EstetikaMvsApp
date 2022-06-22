@@ -4,114 +4,48 @@
     ViewBag.Title = "Личный кабинет";
 }
 
-
 <br />
 <br />
 <br />
-
-    <h3 style="margin-left:50px;">Мои записи</h3>
-    <hr />
-
-    <div style="display:flex; flex-wrap: wrap;">
-       
-
-        @foreach (var item in Model.Zapis)
-        {
-
-
-
-            <div style="grid-template-rows: 70% 30%; margin: 2em; padding-left:125px;">
-
-                <div style="position:relative;">
-
-                    @{ if (item.Activien == true)
-                        {
-                            <img id='previewImage' class="imgactive" style='width: 150px; height: 150px; border-radius: 100px' src="~/Resource/activ.png" />
-                        }
-                        else
-                        {
-                            <img id='previewImage' class="imgactive" style='width: 150px; height: 150px; border-radius: 100px' src="~/Resource/otmen.png" />
-                        }
+<h3 style="margin-left:50px;">Мои записи</h3>
+<hr />
+<div style="display:flex; flex-wrap: wrap;">
+    @foreach (var item in Model.Zapis)
+    {
+        <div style="grid-template-rows: 70% 30%; margin: 2em; padding-left:125px;">
+            <div style="position:relative;">
+                @{ if (item.Activien == true)
+                    {
+                        <img id='previewImage' class="imgactive" style='width: 150px; height: 150px; border-radius: 100px' src="~/Resource/activ.png" />
                     }
-
-
-                </div>
-                <div class="rndclss" style=" width: 150px;  text-align:center;">
-                    <div style="margin-top:10px;">
-                        @Html.ActionLink(item.Master.Tip_Master.Imya_Tip_Master, "Details", new { id = item.Master.Tip_Master.ID_Tip_Master }, new { @class = "textstyle masterstyle" })
-                    </div>
-                    <br />
-                    <div>
-                        @Html.ActionLink(@"Мастер: " + item.Master.Imya_Master, "Details", new { id = item.ID_Master }, new { @class = "textstyle" })
-                    </div>
-                    <div>
-                        @Html.ActionLink(@"Дата: " + item.Data, "Details", new { id = item.ID_Master }, new { @class = "textstyle" })
-                    </div>
-                    <div>
-                        @Html.ActionLink(@"Время:" + item.Vremya, "Details", new { id = item.ID_Master }, new { @class = "textstyle" })
-                    </div>
-                    <br />
-                    @*<div>
-                        @Html.ActionLink("Записаться", "Create", "Zapis", new { id = item.ID_Master }, new { @class = "btn btn-default btnstyleformasterpage " })
-
-                    </div>*@
-                </div>
+                    else
+                    {
+                        <img id='previewImage' class="imgactive" style='width: 150px; height: 150px; border-radius: 100px' src="~/Resource/otmen.png" />
+                    }
+                }
             </div>
-        }
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-    @*<dl class="dl-horizontal">
-        
-
-        <dd>
-            @Html.DisplayFor(model => model.Imya)
-        </dd>
-
-        
-        <dd>
-            @Html.DisplayFor(model => model.Phamilia)
-        </dd>
-
-       
-
-        <dd>
-            @Html.DisplayFor(model => model.Electronnya_Pochta)
-        </dd>
-
-        
-
-        <dd>
-            @Html.DisplayFor(model => model.Telephon)
-        </dd>
-
-       
-
-        <dd>
-            @Html.DisplayFor(model => model.Login)
-        </dd>
-
-      
-
-        <dd>
-            @Html.DisplayFor(model => model.Parol)
-        </dd>
-
-       
-
-        <dd>
-            @Html.DisplayFor(model => model.Tip_Polzovatel.Imya_Tip_Polzovatel)
-        </dd>
-
-    </dl>
-</div>*@
-
+            <div class="rndclss" style=" width: 150px;  text-align:center;">
+                <div style="margin-top:10px;">
+                    @Html.ActionLink(item.Master.Tip_Master.Imya_Tip_Master, "Details", new { id = item.Master.Tip_Master.ID_Tip_Master }, new { @class = "textstyle masterstyle" })
+                </div>
+                <br />
+                <div>
+                    @Html.ActionLink(@"Мастер: " + item.Master.Imya_Master, "Details", new { id = item.ID_Master }, new { @class = "textstyle" })
+                </div>
+                <div>
+                    @Html.ActionLink(@"Дата: " + item.Data, "Details", new { id = item.ID_Master }, new { @class = "textstyle" })
+                </div>
+                <div>
+                    @Html.ActionLink(@"Время:" + item.Vremya, "Details", new { id = item.ID_Master }, new { @class = "textstyle" })
+                </div>
+                <br />
+                @if (item.Activien.HasValue && item.Activien.Value)
+                {
+                    <div>
+                        @Html.ActionLink("Отменить запись", "CancelRequest", "Polzovatels", new { requestId = item.ID_Zapis }, new { @class = "btn btn-default btnstyleformasterpage " })
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

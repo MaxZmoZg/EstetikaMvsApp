@@ -42,7 +42,7 @@ namespace Estetika.Controllers
                 {
                     if (user.IsDeleted)
                     {
-                        return Login();
+                        return RedirectToAction("Register");
                     }
                     FormsAuthentication.SetAuthCookie(model.Login, true);
                     return RedirectToAction("Index", "Home");
